@@ -27,6 +27,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('pegawai') ?>">Data Pegawai</a>
             <a class="collapse-item" href="buttons.html">Data Aset</a>
+            <a class="collapse-item" href="<?= base_url('gaji') ?>">Data Penggajian</a>
           </div>
         </div>
       </li>

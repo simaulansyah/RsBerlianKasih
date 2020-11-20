@@ -24,6 +24,8 @@ class Pegawai extends CI_Controller {
             redirect("auth");
         } else
         {
+
+
             $data['jk'] = $this->pegawai->getGender();
             $data['stat'] = $this->pegawai->getStat();
             $data['pegawai'] = $this->pegawai->getpegawai();
@@ -44,16 +46,17 @@ class Pegawai extends CI_Controller {
     public function tambahpegawai()
     {
         $this->form_validation->set_rules('nip','NIP','required');
-        // $this->form_validation->set_rules('nama', 'NAMA', 'required');
+        $this->form_validation->set_rules('nama', 'NAMA', 'required');
         // $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         // $this->form_validation->set_rules('telepon', 'Telepon', 'required');
-        // $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 
         if ($this->form_validation->run()== false)
         {
             $data['pegawai'] = $this->pegawai->getpegawai();
             $data['jabatan'] = $this->pegawai->getJabatan();
-           
+            $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
+            
             $data['title'] = "Data Pegawai";
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);

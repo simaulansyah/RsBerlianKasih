@@ -37,6 +37,7 @@
             </thead>
             <tbody>
                 <?php $i = 1;?>
+              
             <?php foreach($queryjabatan as $p ) :?>
                 <tr>
                 <td><?=$i?></td>    
