@@ -23,11 +23,11 @@
 </a>
 
 </body>
+<script src="<?= base_url('vendor/jquery/jquery-3.5.1.js'); ?>"> </script>
 <script src="<?= base_url('vendor/jquery/jquery.min.js'); ?>"></script>
 <script src="<?= base_url('vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?= base_url('vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
 <script type="text/html"  src="<?= base_url('vendor/js/ruang-admin.min.js'); ?>"></script>
-<script src="<?= base_url('vendor/jquery/jquery-3.5.1.js'); ?>"> </script>
 <script src="<?= base_url('vendor/js/jquery.dataTables.min.js');?>"></script>
 <script src="<?= base_url('vendor/js/dataTables.bootstrap4.min.js')?>" ></script>
 <script src="<?= base_url('vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')?>" ></script>
@@ -47,7 +47,14 @@ $('.custom-file-input').on('change',function(){
     $(document).ready(function() {
     $('#example').DataTable();
 } );
-    </script>
+</script>
+
+
+<script>
+    $(document).ready(function() {
+    $('#datatable').DataTable();
+} );
+</script>
 
 
 
@@ -75,6 +82,48 @@ $("#datepickermasuk").datepicker({
   todayHighlight : true,
 });
 });
+
+</script>
+
+
+
+<script>
+$(document).ready(function(){
+  $(document).on('click', '#select', function (){
+
+
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+    //document.write(today);
+
+    var no_slip = 'sl_' + Math.random().toString(36).substr(2, 4)+ '/' + mm;
+    var nip = $(this).data('nip');
+    var nama_pegawai = $(this).data('nama_pegawai')
+    var tgl = today;
+    var nama_jabatan = $(this).data('nama_jabatan');
+    var gaji_pokok = $(this).data('gaji_pokok');
+    var tunj_jabatan = $(this).data('tunj_jabatan');
+    var potongan = document.getElementById("potongan").value;
+    var total = (gaji_pokok + tunj_jabatan) - potongan ;
+
+    $('#no_slip').val(no_slip);
+    $('#nip').val(nip);
+    $('#nama_pegawai').val(nama_pegawai);
+    $('#tgl').val(tgl);
+    $('#nama_jabatan').val(nama_jabatan);
+    $('#gaji_pokok').val(gaji_pokok);
+    $('#tunj_jabatan').val(tunj_jabatan);
+
+    $('#myModal').modal('hide');
+
+
+  })
+})
 
 </script>
 </html>

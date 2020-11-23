@@ -8,7 +8,7 @@
         </div>
 
         <div>
-        <a href="" data-toggle="modal" data-target="#tbhObtModal" class="badge badge-warning"> Tambah Data Gaji </a>
+        <a href="" data-toggle="modal" data-target="#tbhgajiModal" class="badge badge-warning"> Tambah Data Gaji </a>
         </div>
 
 
@@ -19,12 +19,13 @@
             <tr>
             <th scope="col">#</th>
                 <th scope="col">No Slip</th>
+                <th scope="col">Nip</th>
+                <th scope="col">Nama</th>
                 <th scope="col">Tgl Slip</th>
                 <th scope="col">Gaji Pokok</th>
                 <th scope="col">Tunj. Jabatan</th>
                 <th scope="col">Potongan</th>
                 <th scope="col">Gaji Bersih</th>
-                <th scope="col">Nip</th>
                 <th scope="col">aksi</th>
             </tr>
         </thead>
@@ -34,13 +35,16 @@
             <tr>
                 <td><?=$i?></td>
                 <td><?=$g['no_slip']?></td>
+                <td><?=$g['nip']?></td>
+                <td><?=$g['nama_pegawai']?></td>
                 <td><?=$g['tgl_slip']?></td>
                 <td><?=$g['gaji_pokok']?></td>
                 <td><?=$g['tunj_jabatan']?></td>
                 <td><?=$g['potongan']?></td>
                 <td><?=$g['gaji_bersih']?></td>
-                <td><?=$g['nip']?></td>
-                <td><a href="<?= base_url('Laporanpdf') ?> " class="badge badge-primary">cetak slip</a></td>
+                <td><a href="<?= site_url("Laporanpdf/" . $g['id']); ?> " class="badge badge-primary">cetak slip</a></td>
+
+                
             </tr>
         </tbody>
 <?php endforeach; ?>
@@ -49,10 +53,10 @@
 
 
 
-
-
+</div>
 
 </div>
+
 
 </div>
 
@@ -62,46 +66,50 @@
 
 <!-- modal gaji -->
 
-<div class="modal fade" id="tbhObtModal" tabindex="-1" aria-labelledby="tbhObtModalLabel" aria-hidden="true">
+<div class="modal fade" id="tbhgajiModal" tabindex="-1" aria-labelledby="tbhgajiModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tbhObtModalLabel">Tambah Data Obat</h5>
+                        <h5 class="modal-title" id="tbhgajiModalLabel">Tambah Data Gaji</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <Form action="<?= base_url('apotek/tambahdataobat'); ?>" method="POST">
+                    <Form action="<?= base_url('Gaji/tambahGaji'); ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-group">
+                            <label>No Slip</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="no_slip" name="no_slip" readonly >
+                            </div>
                             <label>Nip</label>
                                 <div class="form-group input-group">
-                                <input type="text" class="form-control" id="kode_obat" name="kode_obat[]" readonly >
-                                <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#exampleModal">
+                                <input type="text" class="form-control" id="nip" name="nip" readonly >
+                                <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#myModal">
                                         <i class="fa fa-search "></i>
                                         </button>
                                 </div>
                             </div>
+                            <label>Nama Pegawai</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai">
+                            </div>
                             <label>Tgl Slip</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="nama_obat" name="nama_obat" placeholder="Tanggal">
+                                <input type="text" class="form-control" id="tgl" name="tgl">
                             </div>
                             <div class="form-group">
                             <label>Gaji Pokok</label>
-                            <input type="text" class="form-control" id="Gp" name="Gp" readonly >
+                            <input type="text" class="form-control" id="gaji_pokok" name="gaji_pokok" readonly >
                             </div>
                             <div class="form-group">
                             <label>Tunjangan jabatan</label>
-                            <input type="text" class="form-control" id="Tj" name="Tj" readonly >
+                            <input type="text" class="form-control" id="tunj_jabatan" name="tunj_jabatan" readonly >
                             </div>
                             <div class="form-group">
                             <label>Potongan</label>
                             <input type="text" class="form-control" id="potongan" name="potongan" >
-                            </div>
-                            <div class="form-group">
-                            <label>Gaji Total</label>
-                                <input type="text" class="form-control" id="gajitotal" name="gajitotal">
-                            </div>
+                            </div> 
                             <div class="form-group">
                             <label>Keterangan</label>
                                 <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="keterangan">
@@ -113,6 +121,63 @@
                             <button type="submit" class="btn btn-primary">simpan</button>
                         </div>
                     </Form>
+                </div>
+            </div>
+        </>
+
+
+        <!-- modal nip search -->
+
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalModalLabel">Tambah Data Gaji</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                   
+                        <div class="modal-body">
+                        
+          <table class="table table-striped" id="datatable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nip</th>
+                <th scope="col">Nama Pegawai</th>
+                <th scope="col">Jabatan</th>
+                <th scope="col">Gaji Pokok</th>
+             
+                <th scope="col">opsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $i = 1 ?>
+              <?php foreach ($qgaji as $g) : ?>
+                <tr>
+                  <th scope="row"><?= $i ?></th>
+                  <td><?= $g['nip']; ?></td>
+                  <td><?= $g['nama_pegawai']; ?></td>
+                  <td><?= $g['nama_jabatan']; ?></td>
+                  <td><?= $g['gaji_pokok']; ?></td>
+                  <td>
+                    <button class="btn btn-xs btn-info" id="select" data-nip="<?= $g['nip'] ?>" data-nama_pegawai="<?= $g['nama_pegawai'] ?>" data-nama_jabatan="<?= $g['nama_jabatan'] ?>" data-gaji_pokok="<?= $g['gaji_pokok'] ?>"  data-tunj_jabatan="<?= $g['tunj_jabatan'] ?>" >
+                      <i class="fa fa-check"></i>Select
+                    </button>
+                  </td>
+                </tr>
+                <?php $i++; ?>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">simpan</button>
+                        </div>
+                    
                 </div>
             </div>
         </div>

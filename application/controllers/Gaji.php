@@ -26,6 +26,8 @@ class Gaji extends CI_Controller {
         {
             $data['title'] = "Data Gaji";
             $data['gaji'] = $this->gaji->getGaji();
+            $data['qgaji'] = $this->gaji->getQueryGaji();
+            
 
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
@@ -36,6 +38,33 @@ class Gaji extends CI_Controller {
         }
        
     }
-    
 
+    public function tambahGaji ()
+    {
+    $gajip = $this->input->post('gaji_pokok');
+    $tunj = $this->input->post('tunj_jabatan');
+    
+    $potongan = $this->input->post('potongan');
+    $gajibersih = ($gajip+$tunj) - $potongan;
+
+  
+
+     $data = array (
+        'no_slip' => $this->input->post('no_slip'),
+        'nip' => $this->input->post('nip'),
+        'nama_pegawai' => $this->input->post('nama_pegawai'),
+        'tgl_slip' => $this->input->post('tgl'),
+        'gaji_pokok' => $gajip,
+        'tunj_jabatan' => $tunj,
+        'potongan' => $potongan,
+        'gaji_bersih' =>  $gajibersih,
+        'id_user' => 1,
+        'keterangan' => $this->input->post('keterangan')
+
+    );
+
+    $this->gaji->SetGaji($data);
+    redirect('gaji');
+    
+    }
 }
