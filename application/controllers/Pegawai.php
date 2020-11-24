@@ -236,4 +236,40 @@ class Pegawai extends CI_Controller {
 
     }
 
+
+    public function kategori()
+    {
+        $data['title'] = "Kategori";
+        $data['jabatan'] = $this->pegawai->getJabatan();
+        $this->load->view("templates/dashboard_header");
+        $this->load->view("templates/dashboard_sidebar", $data);
+        $this->load->view("templates/dashboard_topbar", $data);
+        $this->load->view("pegawai/kategori", $data);
+        $this->load->view("templates/dashboard_footer");
+
+    }
+
+    public function hapusKategori($id)
+    {
+        $this->pegawai->DelKategori($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Delete data karyawan </div>');
+        redirect('pegawai/kategori');
+
+    }
+
+    public function tambahJabatan()
+    {
+
+
+        $data = array(
+            'id_jabatan' => $this->input->post('id_jabatan'),
+            'nama_jabatan' => $this->input->post('nama_jabatan'),
+            'gaji_pokok' => $this->input->post('gaji_pokok'),
+            'tunj_jabatan' => $this->input->post('tunj_jabatan'),
+        ); 
+       
+        $this->pegawai->setKategori($data);
+        redirect('pegawai/kategori');
+    }
+
 }

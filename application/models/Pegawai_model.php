@@ -54,5 +54,17 @@ class Pegawai_model extends CI_Model
         $query = $this->db->update('pegawai', $data, array('id' => $id)); 
 
     }
+    public function DelKategori($id)
+    {
+     
+        $this->db->where('id', $id);
+        $this->db->delete('jabatan');
+    }
 
+    public function setKategori($data)
+    {
+        $this->db->insert('jabatan', $data);
+    }
+
+   
 }

@@ -26,6 +26,21 @@ class Gaji_model extends CI_Model
         $this->db->insert('gaji', $data);
     }
 
+    public function getGajiPegawai($value)
+    {
+        //$query = $this->db->get_where('mytable', array('id' => $id), $limit, $offset);
+
+        $this->db->select('*')
+        ->from('pegawai as t1')
+        ->join('jabatan as t2', 't2.id_jabatan = t1.id_jabatan','LEFT')
+        ->join('gaji as t3', 't3.nip = t1.nip','LEFT')
+        ->where('t3.id', $value);
+
+       $query =  $this->db->get();
+       $result = $query->result_array();
+       return $result;
+    }
+
 
 
 }

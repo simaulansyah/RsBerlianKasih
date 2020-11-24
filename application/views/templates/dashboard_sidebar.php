@@ -18,15 +18,15 @@
       </div>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Office"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
           <span>Office</span>
         </a>
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div id="Office" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('pegawai') ?>">Data Pegawai</a>
-            <a class="collapse-item" href="buttons.html">Kategori Jabatan & Gaji</a>
+            <a class="collapse-item" href="<?= base_url('pegawai/kategori') ?>">Kategori Jabatan & Gaji</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Data Penggajian</a>
           </div>
         </div>

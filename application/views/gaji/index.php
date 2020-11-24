@@ -42,7 +42,7 @@
                 <td><?=$g['tunj_jabatan']?></td>
                 <td><?=$g['potongan']?></td>
                 <td><?=$g['gaji_bersih']?></td>
-                <td><a href="<?= site_url("Laporanpdf/" . $g['id']); ?> " class="badge badge-primary">cetak slip</a></td>
+                <td><a href="<?= base_url("Laporanpdf?param=$g[id]"); ?> " class="badge badge-primary">cetak slip</a></td>
 
                 
             </tr>
