@@ -297,6 +297,7 @@
                                 
                                         <h6 class="f-w-600">Nip</h6> 
                                         <input type="hidden" class="form-control" id="id" name="id"  value="<?= $p['id'];?>">
+                                        <label for=""><?= $p['id']; ?></label>
                                        <input type="text" class="form-control" id="nip" name="nip"  value="<?= $p['nip'];?>">
                                        <h6 class="f-w-600">Nama</h6>
                                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $p['nama_pegawai'];?>">
@@ -391,3 +392,4 @@
                             <?php endforeach;?>
 
                             <!-- akhir modal edit -->
+    

@@ -11,27 +11,23 @@
         <a href="" data-toggle="modal" data-target="#tbhgajiModal" class="badge badge-warning"> Tambah Data Gaji </a>
         </div>
 
-
-
-
-    <table id="example" class="table table-bordered ">
+        <table class="table table-striped" id="datagaji">
         <thead>
-            <tr>
-            <th scope="col">#</th>
-                <th scope="col">No Slip</th>
-                <th scope="col">Nip</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Tgl Slip</th>
-                <th scope="col">Gaji Pokok</th>
-                <th scope="col">Tunj. Jabatan</th>
-                <th scope="col">Potongan</th>
-                <th scope="col">Gaji Bersih</th>
-                <th scope="col">aksi</th>
-            </tr>
+            <td>#</td>
+                <td>No Slip</td>
+                <td>Nip</td>
+                <td>Nama</td>
+                <td>Tgl Slip</td>
+                <td>Gaji Pokok</td>
+                <td>Tunj. Jabatan</td>
+                <td>Potongan</td>
+                <td>Gaji Bersih</td>
+                <td>aksi</td>
+       
         </thead>
         <tbody>
-            <?php $i = 0;?>
-            <?php foreach($gaji as $g) : $i++ ?>
+        <?php $i = 1;?>
+            <?php foreach($gaji as $g) :?>
             <tr>
                 <td><?=$i?></td>
                 <td><?=$g['no_slip']?></td>
@@ -43,11 +39,11 @@
                 <td><?=$g['potongan']?></td>
                 <td><?=$g['gaji_bersih']?></td>
                 <td><a href="<?= base_url("Laporanpdf?param=$g[id]"); ?> " class="badge badge-primary">cetak slip</a></td>
-
-                
             </tr>
+            <?php $i++?>
+            <?php endforeach; ?>
         </tbody>
-<?php endforeach; ?>
+
     </table>
 
 
@@ -139,8 +135,9 @@
                     </div>
                    
                         <div class="modal-body">
-                        
-          <table class="table table-striped" id="datatable">
+
+         
+          <table class="table table-striped" id="serachnip">
             <thead>
               <tr>
                 <th scope="col">#</th>

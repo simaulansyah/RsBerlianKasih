@@ -45,7 +45,7 @@ class Pegawai extends CI_Controller {
     }
     public function tambahpegawai()
     {
-        $this->form_validation->set_rules('nip','NIP','required');
+        $this->form_validation->set_rules('nip','NIP','required|is_uninque[pegawai.nip]');
         $this->form_validation->set_rules('nama', 'NAMA', 'required');
         // $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         // $this->form_validation->set_rules('telepon', 'Telepon', 'required');
@@ -238,38 +238,79 @@ class Pegawai extends CI_Controller {
 
 
     public function kategori()
-    {
-        $data['title'] = "Kategori";
-        $data['jabatan'] = $this->pegawai->getJabatan();
-        $this->load->view("templates/dashboard_header");
-        $this->load->view("templates/dashboard_sidebar", $data);
-        $this->load->view("templates/dashboard_topbar", $data);
-        $this->load->view("pegawai/kategori", $data);
-        $this->load->view("templates/dashboard_footer");
+
+    {  
+       
+       
+            $data['jabatan'] = $this->pegawai->getJabatan();
+            $data['title'] = "Kategori";
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("pegawai/kategori", $data);
+            $this->load->view("templates/dashboard_footer");
+        
+ 
 
     }
 
     public function hapusKategori($id)
     {
         $this->pegawai->DelKategori($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Delete data karyawan </div>');
-        redirect('pegawai/kategori');
+        $error = $this->db->error();
+        if ($error['code'] != 0 )
+        {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Data Kategori Sudah Terpakai Tidak dapat di hapus // Jika Ingin Di Hapus cari Data yang telah terpakai lalu hapus </div>');
+            redirect('pegawai/kategori');
+
+        } else
+        { 
+             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Berhasil Menghapus Kategori Jabatan </div>');
+            redirect('pegawai/kategori');
+
+        }
+      
 
     }
 
     public function tambahJabatan()
     {
+        $this->form_validation->set_rules('tbhid_jabatan','ID Jabatan', 'required|is_unique[jabatan.id_jabatan]');
+        $this->form_validation->set_rules('tbhnama_jabatan','Nama Jabatan', 'required|is_unique[jabatan.nama_jabatan]');
+        $this->form_validation->set_rules('tbhgaji_pokok','Gaji Pokok', 'required');
+        
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['jabatan'] = $this->pegawai->getJabatan();
+            $data['title'] = "Kategori";
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("pegawai/kategori", $data);
+            $this->load->view("templates/dashboard_footer");
+        
+        } else 
+        {
+            $data = array(
+                'id_jabatan' => $this->input->post('tbhid_jabatan'),
+                'nama_jabatan' => $this->input->post('tbhnama_jabatan'),
+                'gaji_pokok' => $this->input->post('tbhgaji_pokok'),
+                'tunj_jabatan' => $this->input->post('tbhtunj_jabatan'),
+            ); 
+           
+            $this->pegawai->setKategori($data);
+            redirect('pegawai/kategori');
+
+        }
 
 
-        $data = array(
-            'id_jabatan' => $this->input->post('id_jabatan'),
-            'nama_jabatan' => $this->input->post('nama_jabatan'),
-            'gaji_pokok' => $this->input->post('gaji_pokok'),
-            'tunj_jabatan' => $this->input->post('tunj_jabatan'),
-        ); 
-       
-        $this->pegawai->setKategori($data);
-        redirect('pegawai/kategori');
+     
+    }
+
+    public function editJabatan()
+    {
+
     }
 
 }

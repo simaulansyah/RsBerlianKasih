@@ -52,9 +52,18 @@ $('.custom-file-input').on('change',function(){
 
 <script>
     $(document).ready(function() {
-    $('#datatable').DataTable();
+    $('#datagaji').DataTable();
 } );
 </script>
+
+
+<script>
+    $(document).ready(function() {
+    $('#serachnip').DataTable();
+} );
+</script>
+
+
 
 
 

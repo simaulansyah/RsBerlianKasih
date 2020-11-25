@@ -29,8 +29,8 @@ class Pegawai_model extends CI_Model
     public function getJoinJabatan()
     {
         $this->db->select('*')
-                 ->from('pegawai')
-                 ->join('jabatan', 'jabatan.id_jabatan = pegawai.id_jabatan');
+                 ->from('jabatan')//jabatan adalah anak & pegawai adalah tabel utama 
+                 ->join('pegawai', 'pegawai.id_jabatan = jabatan.id_jabatan');
 
         $query = $this->db->get();
         $result = $query->result_array();
@@ -56,8 +56,7 @@ class Pegawai_model extends CI_Model
     }
     public function DelKategori($id)
     {
-     
-        $this->db->where('id', $id);
+        $this->db->where('id_jabatan', $id);
         $this->db->delete('jabatan');
     }
 
