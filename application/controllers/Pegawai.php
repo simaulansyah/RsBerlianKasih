@@ -45,7 +45,8 @@ class Pegawai extends CI_Controller {
     }
     public function tambahpegawai()
     {
-        $this->form_validation->set_rules('nip','NIP','required|is_uninque[pegawai.nip]');
+        //required|is_unique[jabatan.id_jabatan]
+        $this->form_validation->set_rules('nip','NIP','required|is_unique[pegawai.nip]');
         $this->form_validation->set_rules('nama', 'NAMA', 'required');
         // $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         // $this->form_validation->set_rules('telepon', 'Telepon', 'required');
@@ -132,17 +133,59 @@ class Pegawai extends CI_Controller {
         
     }
 
-    public function hapusKaryawan($id)
+    public function hapusKaryawan($nip)
     {
-       $this->pegawai->DelPegawai($id);
-       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Delete data karyawan </div>');
-       redirect('pegawai');
+       $this->pegawai->DelPegawai($nip);
+       $error = $this->db->error();
+        if ($error['code'] != 0 )
+        {
+        
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">  data gagal dihapus </div>');
+            redirect('pegawai');
+
+        } else
+        { 
+           
+             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Delete data karyawan </div>');
+             redirect('pegawai');
+
+        }
 
     }
 
     public function editKaryawan()
     {
-        $id = $this->input->post('id');
+        //cek nip lama dan yang baru apakah sama // jika beda berarti proses pergantian nip dan harus uniq
+        $oldnip = $this->input->post('oldnip');
+        if($this->input->post('nip') != $oldnip) {
+            $is_unique =  '|is_unique[pegawai.nip]';
+         } else {
+            $is_unique =  '' ;
+         }
+
+        $this->form_validation->set_rules('nip','NIP','required'.$is_unique);
+        $this->form_validation->set_rules('nama', 'NAMA', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+
+
+        if ($this->form_validation->run()== false)
+        {
+            $data['pegawai'] = $this->pegawai->getpegawai();
+            $data['jabatan'] = $this->pegawai->getJabatan();
+            $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
+            
+            $data['title'] = "Data Pegawai";
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("pegawai/index", $data);
+            $this->load->view("templates/dashboard_footer");
+
+        }
+        else
+        {
+
+        $oldnip = $this->input->post('oldnip');
         $nip = $this->input->post('nip');
         $nama_pegawai = $this->input->post('nama');
         $tempat_lahir = $this->input->post('tlahir');
@@ -156,8 +199,6 @@ class Pegawai extends CI_Controller {
         $id_jabatan = $this->input->post('jabatan');
         $poto = $_FILES['image']['name'];  //cek gambar
       
-       
-        
         if ($poto)
         {
             $config['upload_path'] = './upload/profil/user';
@@ -203,9 +244,10 @@ class Pegawai extends CI_Controller {
                 'id_jabatan' => $id_jabatan,
                 'poto' => $poto
             ];
-            
-            
-            $this->pegawai->updatePegawai($data, $id);
+                        
+            $this->pegawai->updatePegawai($data, $oldnip);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Edit data karyawan </div>');
+
             redirect('pegawai');
         }else
         {
@@ -226,22 +268,19 @@ class Pegawai extends CI_Controller {
                 'poto' => $this->input->post('old')
             ];
             
-            
-            $this->pegawai->updatePegawai($data, $id);
+            $this->pegawai->updatePegawai($data, $oldnip);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Edit data karyawan </div>');
             redirect('pegawai');
+            }
 
-
+    
         }
-
-
     }
 
 
     public function kategori()
 
     {  
-       
-       
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['title'] = "Kategori";
             $this->load->view("templates/dashboard_header");
@@ -249,9 +288,6 @@ class Pegawai extends CI_Controller {
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("pegawai/kategori", $data);
             $this->load->view("templates/dashboard_footer");
-        
- 
-
     }
 
     public function hapusKategori($id)
@@ -300,6 +336,7 @@ class Pegawai extends CI_Controller {
             ); 
            
             $this->pegawai->setKategori($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Edit data karyawan </div>');
             redirect('pegawai/kategori');
 
         }
@@ -309,7 +346,65 @@ class Pegawai extends CI_Controller {
     }
 
     public function editJabatan()
-    {
+
+   {
+
+    // cek id & nama sebelum nya
+     $oldid = $this->input->post('oldid');
+     if($this->input->post('editid_jabatan') != $oldid) {
+         $is_unique =  '|is_unique[jabatan.id_jabatan]';
+     } else {
+        $is_unique =  '' ;
+     }
+
+     $oldname = $this->input->post('oldname');
+     if($this->input->post('editnama_jabatan') != $oldname) {
+         $is_uniqueName =  '|is_unique[jabatan.nama_jabatan]';
+      } else {
+         $is_uniqueName =  '' ;
+      }
+
+        $this->form_validation->set_rules('editid_jabatan','ID Jabatan', 'required'.$is_unique);
+        $this->form_validation->set_rules('editnama_jabatan','Nama Jabatan', 'required'.$is_uniqueName);
+        $this->form_validation->set_rules('editgaji_pokok','Gaji Pokok', 'required');
+  
+        if ($this->form_validation->run() == False)
+        {
+            $data['jabatan'] = $this->pegawai->getJabatan();
+            $data['title'] = "Kategori";
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("pegawai/kategori", $data);
+            $this->load->view("templates/dashboard_footer");
+
+        }
+        else
+        {
+            $data  = 
+            [
+                'id_jabatan' => $this->input->post('editid_jabatan'),
+                'nama_jabatan' => $this->input->post('editnama_jabatan'),
+                'gaji_pokok' => $this->input->post('editgaji_pokok'),
+                'tunj_jabatan' => $this->input->post('edittunj_jabatan')
+            ];
+
+            $this->pegawai->updateKategori($data, $oldid);
+            $error = $this->db->error();
+            if ($error['code'] != 0 )
+            {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> ID Jabatan Sudah Terpakai Tidak dapat di hapus atau di update // Jika Ingin Di Hapus atau update cari Data yang telah terpakai lalu hapus </div>');
+                redirect('pegawai/kategori');
+    
+            } else
+            { 
+                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Berhasil edit Kategori Jabatan </div>');
+                redirect('pegawai/kategori');
+    
+            }
+
+
+        }
 
     }
 

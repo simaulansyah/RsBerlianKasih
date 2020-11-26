@@ -7,6 +7,10 @@
             </ol>
         </div>
 
+
+        <h5><?= $this->session->flashdata('message'); ?></h5> 
+
+
         <div>
         <a href="" data-toggle="modal" data-target="#tbhgajiModal" class="badge badge-warning"> Tambah Data Gaji </a>
         </div>
@@ -38,7 +42,8 @@
                 <td><?=$g['tunj_jabatan']?></td>
                 <td><?=$g['potongan']?></td>
                 <td><?=$g['gaji_bersih']?></td>
-                <td><a href="<?= base_url("Laporanpdf?param=$g[id]"); ?> " class="badge badge-primary">cetak slip</a></td>
+                <td><a href="<?= base_url("Laporan/Karyawan/Laporanpdf?param=$g[id]"); ?> " class="badge badge-primary">cetak slip</a>
+                <a href="<?= base_url("gaji/hapusGaji?param=$g[id]"); ?> " class="badge badge-danger">delete</a></td>
             </tr>
             <?php $i++?>
             <?php endforeach; ?>

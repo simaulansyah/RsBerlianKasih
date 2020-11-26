@@ -64,7 +64,14 @@ class Gaji extends CI_Controller {
     );
 
     $this->gaji->SetGaji($data);
-    redirect('gaji');
-    
+    redirect('gaji');    
+    }
+
+    public function hapusGaji()
+    {
+        $id = $_GET['param'];
+        $this->gaji->DelGaji($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Sukses Delete </div>');
+        redirect('gaji');
     }
 }

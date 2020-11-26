@@ -41,6 +41,13 @@ class Gaji_model extends CI_Model
        return $result;
     }
 
+    public function DelGaji($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('gaji');
+
+    }
+
 
 
 }

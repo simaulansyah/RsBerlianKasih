@@ -6,8 +6,9 @@
     <div class="sidebar-brand-text mx-3"> Berlian-Kasih</div>
   </a>
   <hr class="sidebar-divider my-0">
-  <li class="nav-item active">
-    <a class="nav-link" href="">
+  
+  <li <?= $this->uri->segment(1) == 'admin' ? 'class = "nav-item active"' : 'class = "nav-item"' ?>>
+    <a class="nav-link" href="<?= base_url('admin'); ?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -17,7 +18,7 @@
         Management
       </div>
 
-      <li class="nav-item">
+      <li  <?= $this->uri->segment(1) == 'pegawai' ? 'class = "nav-item active"' : 'class = "nav-item"' ?>>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Office"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
@@ -25,7 +26,7 @@
         </a>
         <div id="Office" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('pegawai') ?>">Data Pegawai</a>
+            <a class="collapse-item active " href="<?= base_url('pegawai') ?>">Data Pegawai</a>
             <a class="collapse-item" href="<?= base_url('pegawai/kategori') ?>">Kategori Jabatan & Gaji</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Data Penggajian</a>
           </div>

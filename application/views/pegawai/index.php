@@ -21,6 +21,8 @@
         <?= form_error('telepon', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('jabatan', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 
+        <h5><?= $this->session->flashdata('message'); ?></h5> 
+
 
         <div class="d-sm-flex align-items-center justify-content-between mb-3" >
         <a href="" data-toggle="modal" data-target="#tbhPgwModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Pegawai</a>
@@ -46,9 +48,9 @@
                 <td><?= $p['no_telp']; ?></td>
                 <td><?= $p['nama_jabatan']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#dtlPgwModal<?= $p['id']; ?>" class="badge badge-success">detail</a>
-                <a href="" data-toggle="modal" data-target="#edtPgwModal<?= $p['id']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("pegawai/hapusKaryawan/" . $p['id']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="" data-toggle="modal" data-target="#dtlPgwModal<?= $p['nip']; ?>" class="badge badge-success">detail</a>
+                <a href="" data-toggle="modal" data-target="#edtPgwModal<?= $p['nip']; ?>"  class="badge badge-primary">edit</a>
+                <a href="<?php echo site_url("pegawai/hapusKaryawan/" . $p['nip']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 
                 </td>
                 </tr>
@@ -182,11 +184,11 @@
    
     <?php $i=0?>
                                     <?php foreach($queryjabatan as $p) : $i++ ?>
-                                 <div class="modal fade bd-example-modal-lg" id="dtlPgwModal<?= $p['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtPgwModal" aria-hidden="true">
+                                 <div class="modal fade bd-example-modal-lg" id="dtlPgwModal<?= $p['nip']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtPgwModal" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="dtlPgwModal">Modal title</h5>
+                                            <h5 class="modal-title" id="dtlPgwModal">Detail Karyawan</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -272,11 +274,11 @@
 
                                  <?php $i=0?>
                                     <?php foreach($queryjabatan as $p) : $i++ ?>
-                                 <div class="modal fade bd-example-modal-lg" id="edtPgwModal<?= $p['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtPgwModal" aria-hidden="true">
+                                 <div class="modal fade bd-example-modal-lg" id="edtPgwModal<?= $p['nip']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtPgwModal" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="edtPgwModal">Modal title</h5>
+                                            <h5 class="modal-title" id="edtPgwModal">Edit Karyawan</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -296,8 +298,8 @@
                                        <div class="m-b-25"> <img src="<?= base_url('upload/profil/user/') . $p['poto']?>" class="img-radius" alt="User-Profile-Image" width="100" > </div>
                                 
                                         <h6 class="f-w-600">Nip</h6> 
-                                        <input type="hidden" class="form-control" id="id" name="id"  value="<?= $p['id'];?>">
-                                        <label for=""><?= $p['id']; ?></label>
+                                        <input type="hidden" id="oldnip" name="oldnip" value="<?= $p['nip'];?>">
+                                      
                                        <input type="text" class="form-control" id="nip" name="nip"  value="<?= $p['nip'];?>">
                                        <h6 class="f-w-600">Nama</h6>
                                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $p['nama_pegawai'];?>">

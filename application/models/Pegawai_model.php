@@ -21,9 +21,9 @@ class Pegawai_model extends CI_Model
     {
         $this->db->insert('pegawai', $data);
     }
-    public function DelPegawai($id)
+    public function DelPegawai($oldnip)
     {
-        $this->db->where('id', $id);
+        $this->db->where('nip', $oldnip);
         $this->db->delete('pegawai');
     }
     public function getJoinJabatan()
@@ -49,9 +49,10 @@ class Pegawai_model extends CI_Model
         return $stat;
     }
 
-    public function updatePegawai($data, $id)
+    public function updatePegawai($data, $oldnip)
     {
-        $query = $this->db->update('pegawai', $data, array('id' => $id)); 
+      
+     $this->db->update('pegawai', $data, array('nip' => $oldnip)); 
 
     }
     public function DelKategori($id)
@@ -63,6 +64,12 @@ class Pegawai_model extends CI_Model
     public function setKategori($data)
     {
         $this->db->insert('jabatan', $data);
+    }
+
+    public function updateKategori($data, $oldid)
+    
+    {
+        $this->db->update('jabatan', $data, array('id_jabatan' => $oldid)); 
     }
 
    

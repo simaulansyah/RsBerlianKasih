@@ -12,6 +12,10 @@
       <?= form_error('tbhid_jabatan', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
       <?= form_error('tbhnama_jabatan', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
       <?= form_error('tbhgaji_pokok', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+
+      <?= form_error('editid_jabatan', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+      <?= form_error('editnama_jabatan', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+      <?= form_error('editgaji_pokok', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
      
       
       
@@ -41,8 +45,8 @@
                 <td><?=$j['gaji_pokok']?></td>
                 <td><?=$j['tunj_jabatan']?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#editbtnModal<?= $j['id_jabatan']; ?>"  class="badge badge-primary">edit</a>
-
+                
+                <a href="" data-toggle="modal" data-target="#edtJbtnModal<?= $j['id_jabatan'] ?>"  class="badge badge-primary">edit</a>
                 <a href="<?php echo site_url("pegawai/hapusKategori/" . $j['id_jabatan']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 </td>
                 
@@ -50,6 +54,34 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+
+
+       <!-- Modal Logout -->
+       <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                        <a href="<?= base_url('Auth/logout') ?>" class="btn btn-primary">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!---Container Fluid-->
+    </div>
+    <!-- Footer -->
 
 
 
@@ -93,54 +125,72 @@
                     </Form>
                 </div>
             </div>
-
-                      
 </div>
+
+
 
 <!-- dibawah footer -->
 
 <!-- modal edit -->
-<?php $i=0?>
-<?php foreach($jabatan as $p) : $i++ ?>
 
-<div class="modal fade" id="editbtnModal<?= $j['id_jabatan'] ?>" tabindex="-1" aria-labelledby="tbhjbtnModalLabel">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tbhjbtnModalLabel">Edit Data Jabatan</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?= base_url('pegawai/editJabatan'); ?>" method="POST">
+
+<?php $i=0?>
+<?php foreach($jabatan as $j) : $i++ ?>
+ <div class="modal fade" id="edtJbtnModal<?= $j['id_jabatan'] ?>" tabindex="-1" role="dialog" aria-labelledby="eedtJbtnModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edtJbtnModalLabel">Edit Kategori jabatan & Gaji</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- isi edit -->
+      <Form action="<?= base_url('pegawai/editJabatan'); ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                            <label>Id_Jabatan</label>
+                            <label>ID_Jabatan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="id_jabatan" name="id_jabatan" value="<?=$p ['id_jabatan']?>"  >
+                                <input type="hidden" id="oldid" name="oldid" value="<?= $j['id_jabatan'] ?>">
+                                <input type="text" class="form-control" id="editid_jabatan" name="editid_jabatan" value="<?= $j['id_jabatan'] ?>"  >
                             </div>
                             <label>Nama Jabatan</label>
                                 <div class="form-group input-group">
-                                <input type="text" class="form-control" id="nama_jabatan" name="nama_jabatan" value="<?=$p ['nama_jabatan']?>"  >
+                                <input type="hidden" id="oldname" name="oldname" value="<?= $j['nama_jabatan'] ?>">
+                                <input type="text" class="form-control" id="editnama_jabatan" name="editnama_jabatan" value="<?=$j['nama_jabatan']?>" >
                                 </div>
                             </div>
                             <label>Gaji Pokok</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="gaji_pokok" name="gaji_pokok" value="<?=$p ['nama_jabatan']?>"   >
+                                <input type="text" class="form-control" id="editgaji_pokok" name="editgaji_pokok" value="<?= $j['gaji_pokok']?>" >
                             </div>
                             <label>Tunjangan Jabatan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="tunj_jabatan" name="tunj_jabatan" value="<?=$p ['tunj_jabatan']?>"  >
+                                <input type="text" class="form-control" id="edittunj_jabatan" name="edittunj_jabatan" value="<?= $j['tunj_jabatan'] ?>" >
                             </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">simpan</button>
-                        </div>
-                    </form>
-                    <?php endforeach;?>
-                </div>
-            </div>
-            
 </div>
+      <!-- akhir isi edit -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+ </div>
+ </form>
+<?php endforeach;?>
+<!-- akhir modal edit -->
+
+
+
+
+
+
+
+
+
+
+
+
