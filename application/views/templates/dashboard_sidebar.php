@@ -65,14 +65,14 @@
       </div>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Ruangan"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
           <span>Admin Ruangan</span>
         </a>
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div id="Ruangan" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('pegawai') ?>">Data Ruangan</a>
+            <a class="collapse-item" href="<?= base_url('Ruangan/Ruangan') ?>">Data Ruangan</a>
             <a class="collapse-item" href="buttons.html">Data Tempat Tidur</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Kategori Ruangan</a>
           </div>

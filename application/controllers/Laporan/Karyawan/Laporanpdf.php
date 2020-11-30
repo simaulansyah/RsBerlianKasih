@@ -16,9 +16,6 @@ Class Laporanpdf extends CI_Controller{
         //query get gaji
        $data = $this->gaji->getGajiPegawai($value);
        
-
-
-       
         $pdf = new FPDF('l','mm','A5');
         // membuat halaman baru
         $pdf->AddPage();

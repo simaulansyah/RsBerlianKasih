@@ -28,7 +28,7 @@
         <a href="" data-toggle="modal" data-target="#tbhPgwModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Pegawai</a>
         </div>
         
-          <table class="table table-striped" id="example">
+          <table class="table table-striped" id="pegawai">
             <thead>
                 <td>#</td>
                 <td>Nip</td>
@@ -60,9 +60,6 @@
             </tbody>
           </table>
 
-
-
-
         <!-- Modal Logout -->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -89,12 +86,7 @@
     </div>
     <!-- Footer -->
 
-  
-
-
-
     <!-- modal tambah -->
-
 
     <div class="modal fade" id="tbhPgwModal" tabindex="-1" aria-labelledby="tbhPgwModalLabel" aria-hidden="true">
             <div class="modal-dialog">

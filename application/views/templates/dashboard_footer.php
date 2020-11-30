@@ -31,7 +31,7 @@
 <script src="<?= base_url('vendor/js/jquery.dataTables.min.js');?>"></script>
 <script src="<?= base_url('vendor/js/dataTables.bootstrap4.min.js')?>" ></script>
 <script src="<?= base_url('vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')?>" ></script>
-
+<script src="<?= base_url('vendor/mylibrary/datatable.js')?>" ></script>
 
 
 <script>
@@ -41,30 +41,6 @@ $('.custom-file-input').on('change',function(){
 })
 
 </script>
-
-
-<script>
-    $(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
-
-
-<script>
-    $(document).ready(function() {
-    $('#datagaji').DataTable();
-} );
-</script>
-
-
-<script>
-    $(document).ready(function() {
-    $('#serachnip').DataTable();
-} );
-</script>
-
-
-
 
 
         <!-- datepicker 1 -->
@@ -99,9 +75,6 @@ $("#datepickermasuk").datepicker({
 <script>
 $(document).ready(function(){
   $(document).on('click', '#select', function (){
-
-
-
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -135,4 +108,5 @@ $(document).ready(function(){
 })
 
 </script>
+
 </html>
