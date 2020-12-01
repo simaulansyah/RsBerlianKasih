@@ -107,6 +107,28 @@ $(document).ready(function(){
   })
 })
 
+
+
+$(document).ready(function(){
+  $(document).on('click', '#selectidRuangan', function (){
+
+    var id_ruangan = $(this).data('id_ruangan');
+    var nama_ruangan = $(this).data('nama_ruangan')
+    var kelas = $(this).data('kelas');
+
+
+    $('#id_ruangan').val(id_ruangan);
+    $('#nama_ruangan').val(nama_ruangan);
+    $('#kelas').val(kelas);
+    $('#idRuangan').modal('hide');
+
+
+  })
+})
+
+
+
+
 </script>
 
 </html>

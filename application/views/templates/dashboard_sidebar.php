@@ -73,7 +73,7 @@
         <div id="Ruangan" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('Ruangan/Ruangan') ?>">Data Ruangan</a>
-            <a class="collapse-item" href="buttons.html">Data Tempat Tidur</a>
+            <a class="collapse-item" href="<?= base_url('Ruangan/Bed') ?>">Data Tempat Tidur</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Kategori Ruangan</a>
           </div>
         </div>

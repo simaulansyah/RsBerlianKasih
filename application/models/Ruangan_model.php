@@ -19,6 +19,23 @@ class Ruangan_model extends CI_Model
         $this->db->where('id_ruangan', $id_ruangan);
         $this->db->delete('ruangan');
     }
+    public function getBed()
+    {
+        $query = $this->db->query('SELECT * FROM kasur');
+        $result = $query->result_array();
+        return $result;
+    }
+    public function setBed($data)
+    {
+        $this->db->insert("kasur",$data);
+
+    }
+    public function delBed ($id_kasur)
+    {
+        $this->db->where('id_kasur', $id_kasur);
+        $this->db->delete('kasur');
+
+    }
 
 
 

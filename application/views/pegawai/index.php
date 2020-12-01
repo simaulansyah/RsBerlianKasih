@@ -116,7 +116,7 @@
                             <select name="gender" id="gender" class="form-control">
                             <option value="">Pilih Jenis Kelamin</option> 
                             <option value="Pria"> Pria </option> 
-                            <option value="Pria"> Wanita </option>   
+                            <option value="Wanita"> Wanita </option>   
                         </select>
                             </div>
                             <div class="form-group">
