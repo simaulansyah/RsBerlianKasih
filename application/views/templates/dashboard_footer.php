@@ -22,8 +22,8 @@
   <i class="fas fa-angle-up"></i>
 </a>
 
-</body>
 <script src="<?= base_url('vendor/jquery/jquery-3.5.1.js'); ?>"> </script>
+
 <script src="<?= base_url('vendor/jquery/jquery.min.js'); ?>"></script>
 <script src="<?= base_url('vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?= base_url('vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
@@ -130,5 +130,5 @@ $(document).ready(function(){
 
 
 </script>
-
+</body>
 </html>

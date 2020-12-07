@@ -44,9 +44,9 @@
                 <td><?= $b['nama_ruangan']?></td>
                 <td><?= $b['kelas'] ?></td>
                 <td><?= $b['tarif'] ?></td>
-                <td><?= $b['status'] ?></td>
+                <td><?= ($b['status'] == 1 ) ? "isi" : "kosong"; ?></td>
         <td>
-                <a href="" data-toggle="modal" data-target="#edtPgwModal"  class="badge badge-primary">edit</a>
+                <a href="" data-toggle="modal" data-target="#edtBedModal<?= $b['id_kasur']; ?>"  class="badge badge-primary">edit</a>
                 <a href="<?=site_url("Ruangan/Bed/hapusKasur/" . $b['id_kasur']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 
                 </td>
@@ -199,3 +199,73 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- modal edit kasur -->
+        <?php $i=0?>
+    <?php foreach($bed as $b) : $i++ ?>
+        <div class="modal fade" id="edtBedModal<?= $b['id_kasur']?>" tabindex="-1" role="dialog" aria-labelledby="edtBedModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edtBedModalLabel">Edit Data Kasur </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <Form action="<?= base_url('Ruangan/Bed/editKasur'); ?>" method="POST">
+      <div class="modal-body">
+
+      <table class="table" >
+        <tr>
+            <td>No Kasur :</td>
+            <td><input type="text" name="nokasur" class="form-control" value="<?= $b['id_kasur'];?>"  ></td>
+            <input type="hidden" name="oldid" value="<?= $b['id_kasur'];?>"> 
+        </tr>
+        <tr>
+            <td>ID Ruangan :</td>
+            <td><input type="text" id="eid_ruangan" name="idruangan" class="form-control" value="<?= $b['id_ruangan'];?>"    readonly ></td>
+           
+        </td>
+        </tr>
+        <tr>
+            <td>Nama Ruangan :</td>
+            <td><input type="text" id="enama_ruangan" name="namaruangan" class="form-control" value="<?= $b['nama_ruangan'];?>"  readonly ></td>
+        </tr>
+        <tr>
+            <td>Kelas :</td>
+            <td><input type="text" id="ekelas"  name="kelas" class="form-control" value="<?= $b['kelas'];?>" readonly ></td>
+        </tr>
+        <tr>
+            <td>Tarif Kamar :</td>
+            <td><input type="text" name="tarif"  id="tarif" class="form-control" value="<?= $b['tarif'];?>"  ></td>
+        </tr>
+        <tr>
+            <td>Status : </td>
+            <td>
+            <select name="status" id="status" class="form-control">
+                            <?php for($i=0;$i<count($stat);$i++){ ?> 
+                                                <option <?php if($stat[$i] == $b['status'] ){ echo 'selected="selected"'; } ?> value="<?= $stat[$i]; ?>"> <?= ($stat[$i] == 1)? "isi" : "kosong"; ?> </option> 
+                                                <?php }?>
+                                                
+                        </select>
+                
+            </td>
+        </tr>
+      </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </Form>
+    </div>
+  </div>
+</div>
+<?php endforeach;?>
+
+
+
+  

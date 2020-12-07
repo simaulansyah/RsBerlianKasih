@@ -25,6 +25,7 @@ class Bed extends CI_Controller {
             redirect("auth");
         } else
         {
+            $data['stat'] = $this->model->getStatus();
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
@@ -99,5 +100,65 @@ class Bed extends CI_Controller {
             redirect('Ruangan/Bed');
 
         }
+    }
+
+    public function editKasur()
+    {
+          // cek id kasur
+         $oldid = $this->input->post('oldid');
+     if($this->input->post('nokasur') != $oldid) {
+         $is_unique =  '|is_unique[kasur.id_kasur]';
+     } else {
+        $is_unique =  '' ;
+     }
+
+        $this->form_validation->set_rules('nokasur','No Kasur', 'required'.$is_unique);
+        $this->form_validation->set_rules('tarif','Tarif', 'required');
+        $this->form_validation->set_rules('status','Status', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['title'] = "Data Tempat Tidur ";
+            $data['ruangan'] = $this->model->getRuangan();
+            $data['bed'] = $this->model->getBed();
+
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("Ruangan/bed", $data);
+            $this->load->view("templates/dashboard_footer");
+        
+        } else {
+
+            $nokasur = $this->input->post('nokasur');
+            $id_ruangan = $this->input->post('idruangan'); //berdasarkan name
+            $nama_ruangan = $this->input->post('namaruangan');
+            $kelas = $this->input->post('kelas');
+            $tarif = $this->input->post('tarif');
+            $status = $this->input->post('status');
+
+            $data=array(
+                'id_kasur' => $nokasur,
+                'id_ruangan' => $id_ruangan,
+                'nama_ruangan' => $nama_ruangan,
+                'kelas' => $kelas,
+                'tarif' => $tarif,
+                'status' => $status
+            );
+
+            $this->model->editKasur($data, $oldid);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Kasur </div>');
+            redirect("Ruangan/Bed");
+
+
+
+
+        }
+
+
+              
+
+                
+
     }
 }

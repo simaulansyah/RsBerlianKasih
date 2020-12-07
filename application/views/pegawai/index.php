@@ -21,13 +21,12 @@
         <?= form_error('telepon', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('jabatan', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 
-        <h5><?= $this->session->flashdata('message'); ?></h5> 
-
-
         <div class="d-sm-flex align-items-center justify-content-between mb-3" >
         <a href="" data-toggle="modal" data-target="#tbhPgwModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Pegawai</a>
         </div>
-        
+
+        <h5><?= $this->session->flashdata('message'); ?></h5> 
+
           <table class="table table-striped" id="pegawai">
             <thead>
                 <td>#</td>
@@ -56,7 +55,6 @@
                 </tr>
                 <?php $i++?>
                 <?php endforeach; ?>
-
             </tbody>
           </table>
 

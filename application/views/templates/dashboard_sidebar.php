@@ -74,7 +74,27 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('Ruangan/Ruangan') ?>">Data Ruangan</a>
             <a class="collapse-item" href="<?= base_url('Ruangan/Bed') ?>">Data Tempat Tidur</a>
-            <a class="collapse-item" href="<?= base_url('gaji') ?>">Kategori Ruangan</a>
+          </div>
+        </div>
+      </li>
+
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+        Asset
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Aset"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Admin Inventaris</span>
+        </a>
+        <div id="Aset" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= base_url('Asset/Asset') ?>">Data Asset</a>
+            <a class="collapse-item" href="<?= base_url('Asset/Asset/Kategori') ?>">Kategori Asset</a>
+            <a class="collapse-item" href="<?= base_url('Asset/Lokasi') ?>">Lokasi Asset</a>
           </div>
         </div>
       </li>

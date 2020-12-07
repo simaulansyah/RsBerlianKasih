@@ -1,3 +1,12 @@
+    <!-- Sidebar -->
+
+    <!-- Sidebar -->
+
+    <!-- TopBar -->
+
+    <!-- Topbar -->
+
+    <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"><?= $title ?></h1>
@@ -42,7 +51,7 @@
                 <td><?= $s['kelas']; ?></td>
                 <td><?= $s['jenis']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#edtPgwModal<?= $s['id_ruangan']; ?>"  class="badge badge-primary">edit</a>
+                <a href="" data-toggle="modal" data-target="#editRuanganModal<?= $s['id_ruangan']; ?>"  class="badge badge-primary">edit</a>
                 <a href="<?=site_url("Ruangan/Ruangan/hapusRuangan/" . $s['id_ruangan']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 
                 </td>
@@ -125,3 +134,58 @@
     </div>
   </div>
 </div>
+
+
+      <!-- modal edit  data -->
+      <?php $i=0?>
+    <?php foreach($ruangan as $r) : $i++ ?>
+<div class="modal fade" id="editRuanganModal<?= $r['id_ruangan']; ?>" tabindex="-1" role="dialog" aria-labelledby="editRuanganModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRuanganModalLabel">edit Data Ruangan </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     <Form action="<?= base_url('Ruangan/Ruangan/editDataRuangan'); ?>" method="POST">
+         <!-- isi edit --> 
+     <table class="table" >
+        <tr>
+            <td>ID Ruangan :</td>
+            <input type="hidden" name="oldid" value="<?= $r['id_ruangan'] ?>">
+            <td><input type="text" name="idruangan" class="form-control" value="<?= $r['id_ruangan']?>"></td>
+        </tr>
+        <tr>
+            <td>Nama Ruangan :</td>
+            <input type="hidden" name="oldname" value="<?= $r['nama_ruangan'] ?>">
+            <td><input type="text" name="namaruangan" class="form-control" value="<?= $r['nama_ruangan'] ?>"></td>
+        </tr>
+        <tr>
+            <td>Kapasitas :</td>
+            <td><input type="text" name="kapasitas" class="form-control" value="<?= $r['kapasitas']?>"></td>
+        </tr>
+        <tr>
+            <td>Kelas :</td>
+            <td><input type="text" name="kelas" class="form-control" value="<?= $r['kelas']?>"></td>
+        </tr>
+        <tr>
+            <td>Jenis :</td>
+            <td><input type="text" name="jenis" class="form-control" value="<?= $r['jenis']?>"></td>
+        </tr>
+      </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    
+    </div>
+  </div>
+  </div>
+  </Form>
+<?php endforeach;?>
+
+

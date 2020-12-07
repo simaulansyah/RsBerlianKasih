@@ -99,4 +99,67 @@ class Ruangan extends CI_Controller {
         }
 
     }
+    public function editDataRuangan()
+    {
+        // cek idruangan
+     $oldid = $this->input->post('oldid');
+     if($this->input->post('idruangan') != $oldid) {
+         $is_unique =  '|is_unique[jabatan.id_jabatan]';
+     } else {
+        $is_unique =  '' ;
+     }
+
+     //cek nama ruangan sebelmunya
+
+     $oldname = $this->input->post('oldname');
+     if($this->input->post('nama_ruangan') != $oldname) {
+         $is_uniqueName =  '|is_unique[jabatan.nama_jabatan]';
+      } else {
+         $is_uniqueName =  '' ;
+      }
+
+
+
+        $this->form_validation->set_rules('idruangan','ID Ruangan', 'required'.$is_unique);
+        $this->form_validation->set_rules('namaruangan','Nama Ruangan', 'required'.$is_uniqueName);
+        $this->form_validation->set_rules('kapasitas','Kapasitas', 'required');
+        $this->form_validation->set_rules('kelas','Kelas', 'required');
+        $this->form_validation->set_rules('jenis','Jenis', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['title'] = "Data Ruangan ";
+            $data['ruangan'] = $this->model->getRuangan();
+
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("Ruangan/index", $data);
+            $this->load->view("templates/dashboard_footer");
+        
+        } else {
+
+        $oldid = $this->input->post('oldid');
+        $newid = $this->input->post('idruangan');
+        $nama_ruangan = $this->input->post('namaruangan');
+        $kapasitas = $this->input->post('kapasitas');
+        $kelas = $this->input->post('kelas');
+        $jenis = $this->input->post('jenis');
+
+        $data=array(
+
+            'id_ruangan' => $newid,
+            'nama_ruangan' => $nama_ruangan,
+            'kapasitas' => $kapasitas,
+            'kelas' => $kelas,
+            'jenis' => $jenis
+        );
+        $this->model->editRuangan($data, $oldid);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Ruangan </div>');
+        redirect("Ruangan/Ruangan");
+        }
+     
+
+
+    }
 }

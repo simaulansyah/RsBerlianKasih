@@ -37,6 +37,23 @@ class Ruangan_model extends CI_Model
 
     }
 
+    public function editRuangan($data, $oldid)
+    {
+        $this->db->update('ruangan', $data, array('id_ruangan' => $oldid)); 
+
+    }
+
+    public function getStatus()
+    {
+        $st = array('0','1');
+        return $st;
+    }
+    public function editKasur($data, $oldid)
+    {
+        $this->db->update('kasur', $data, array('id_kasur' => $oldid)); 
+
+    }
+
 
 
 }
