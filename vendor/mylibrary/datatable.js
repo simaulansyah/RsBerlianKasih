@@ -13,8 +13,12 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#k_asset').DataTable();
 } );
-
-
+$(document).ready(function() {
+    $('#lokasi_aset').DataTable();
+} );
+$(document).ready(function() {
+    $('#asset').DataTable();
+} );
 
 
 

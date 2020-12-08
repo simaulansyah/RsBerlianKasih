@@ -127,6 +127,30 @@ $(document).ready(function(){
 })
 
 
+$(document).ready(function(){
+  $(document).on('click', '#saveAsset', function (){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var kategori = document.getElementById("kategori").value;
+    var tahun = document.getElementById("tahun").value;
+    var lastid = document.getElementById("lastvalueid").value;
+
+    var id_asset = 'aset_' + lastid +'/'+ mm + tahun;
+
+    console.log(id_asset);
+
+    $('#idasset').val(id_asset);
+
+
+  })
+})
+
+
+
+
 
 
 </script>

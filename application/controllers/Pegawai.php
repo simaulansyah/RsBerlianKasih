@@ -45,11 +45,8 @@ class Pegawai extends CI_Controller {
     }
     public function tambahpegawai()
     {
-        //required|is_unique[jabatan.id_jabatan]
         $this->form_validation->set_rules('nip','NIP','required|is_unique[pegawai.nip]');
         $this->form_validation->set_rules('nama', 'NAMA', 'required');
-        // $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        // $this->form_validation->set_rules('telepon', 'Telepon', 'required');
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 
         if ($this->form_validation->run()== false)

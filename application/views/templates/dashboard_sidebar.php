@@ -94,7 +94,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('Asset/Asset') ?>">Data Asset</a>
             <a class="collapse-item" href="<?= base_url('Asset/Asset/Kategori') ?>">Kategori Asset</a>
-            <a class="collapse-item" href="<?= base_url('Asset/Lokasi') ?>">Lokasi Asset</a>
+            <a class="collapse-item" href="<?= base_url('Asset/Asset/Lokasi') ?>">Lokasi Asset</a>
           </div>
         </div>
       </li>

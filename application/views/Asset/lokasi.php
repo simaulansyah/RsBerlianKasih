@@ -8,35 +8,30 @@
         </div>
 
 
+
         <div class="d-sm-flex align-items-center justify-content-between mb-3" >
-        <a href="" data-toggle="modal" data-target="#tbhKAssetModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Kategori Asset</a>
+        <a href="" data-toggle="modal" data-target="#tbhLokasiModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Lokasi Asset</a>
         </div>
 
-        <?= form_error('id_k_asset', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
-        <?= form_error('nama_k_asset', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
-
+        <?= form_error('nama_lokasi', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <h5><?= $this->session->flashdata('message'); ?></h5> 
 
-        <table class="table table-striped" id="k_asset">
+        <table class="table table-striped" id="lokasi_aset">
             <thead>
                 <td>#</td>
-                <td>ID Kategori Asset</td>
-                <td>Nama Kategori</td>
-                <td>Terakhir Update</td>
+                <td>Nama Lokasi</td>
                 <td>Opsi</td>
             </thead>
             <tbody>
                 <?php $i = 1;?>
               
-            <?php foreach($kategori as $k ) :?>
+            <?php foreach($lokasi as $l ) :?>
                 <tr>
                 <td><?=$i?></td>    
-                <td><?= $k['id_k_asset']; ?></td>
-                <td><?= $k['nama_k_asset']; ?></td>
-                <td><?= $k['update_time']; ?></td>
+                <td><?= $l['nama_lokasi']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#edtKasetModal<?= $k['id_k_asset']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("Asset/Asset/delkAsset/" . $k['id_k_asset']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="" data-toggle="modal" data-target="#edtLokasiModal<?= $l['id_lokasi']; ?>"  class="badge badge-primary">edit</a>
+                <a href="<?php echo site_url("Asset/Asset/delLokasi/" . $l['id_lokasi']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 
                 </td>
                 </tr>
@@ -45,7 +40,7 @@
             </tbody>
           </table>
 
-<!-- Modal Logout -->
+          <!-- Modal Logout -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -68,28 +63,24 @@
 
         <!-- akhir logout -->
 
-        <!-- modal tambah -->
 
-<div class="modal fade" id="tbhKAssetModal" tabindex="-1" role="dialog" aria-labelledby="tbhKAssetModalLabel" aria-hidden="true">
+<!-- modal tambah lokasi -->
+        <div class="modal fade" id="tbhLokasiModal" tabindex="-1" role="dialog" aria-labelledby="tbhLokasiModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tbhKAssetModalLabel">Tambah Data Kategori Asset </h5>
+        <h5 class="modal-title" id="tbhLokasiModalLabel">Tambah Data Kategori Asset </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <Form action="<?= base_url('Asset/Asset/tambahKategori'); ?>" method="POST">
+     <Form action="<?= base_url('Asset/Asset/tambahLokasi'); ?>" method="POST">
       <div class="modal-body">
 
       <table class="table" >
         <tr>
-            <td>ID Kategori Asset :</td>
-            <td><input type="text" name="id_k_asset" id="id_k_asset" class="form-control" ></td>
-        </tr>
-        <tr>
-            <td>Nama Kategori Asset :</td>
-            <td><input type="text" name="nama_k_asset" id="nama_k_asset" class="form-control" ></td>
+            <td>Nama Lokasi </td>
+            <td><input type="text" name="nama_lokasi" id="nama_lokasi" class="form-control" ></td>
         </tr>
       </table>
 
@@ -103,31 +94,29 @@
   </div>
 </div>
 
-<!-- edit K_aset -->
+<!-- akhir tambah -->
+<!-- modal edit  -->
+
 <?php $i = 1;?>
-<?php foreach($kategori as $k ) :?>
-<div class="modal fade" id="edtKasetModal<?= $k['id_k_asset']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtKasetModalLabel" aria-hidden="true">
+<?php foreach($lokasi as $l ) :?>
+<div class="modal fade" id="edtLokasiModal<?= $l['id_lokasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtLokasiModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="edtKasetModalLabel">Edit Data Kategori Asset </h5>
+        <h5 class="modal-title" id="edtLokasiModalLabel">Edit Data Lokasi </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <Form action="<?= base_url('Asset/Asset/EditKategori'); ?>" method="POST">
+     <Form action="<?= base_url('Asset/Asset/EditLokasi'); ?>" method="POST">
       <div class="modal-body">
 
       <table class="table" >
         <tr>
-            <td>ID Kategori Asset :</td>
-            <td><input type="text" name="id_k_asset" id="id_k_asset" class="form-control" value="<?= $k['id_k_asset']; ?>" ></td>
-            <input type="hidden" name="oldid" value="<?= $k['id_k_asset']; ?>" >
-        </tr>
-        <tr>
-            <td>Nama Kategori Asset :</td>
-            <td><input type="text" name="nama_k_asset" id="nama_k_asset" class="form-control" value="<?= $k['nama_k_asset']; ?>" ></td>
-            <input type="hidden" name="oldname" value="<?= $k['nama_k_asset']; ?>" >
+            <td>Nama Lokasi :</td>
+            <input type="hidden" name="id_lokasi" id="id_lokasi" value="<?= $l['id_lokasi']; ?>" >
+            <input type="hidden" name="oldname" id="oldname" value="<?= $l['nama_lokasi']; ?>" >            
+            <td><input type="text" name="nama_lokasi" id="nama_lokasi" class="form-control" value="<?= $l['nama_lokasi']; ?>" ></td>
         </tr>
       </table>
 
@@ -142,3 +131,4 @@
 </div>
 <?php $i++?>
 <?php endforeach; ?>
+

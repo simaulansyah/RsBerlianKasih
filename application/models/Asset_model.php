@@ -15,7 +15,7 @@ class Asset_model extends CI_Model
         $this->db->insert('kategori_asset', $data);
     }
 
-    public function delAsset($data)
+    public function delkAsset($data)
     {
         $this->db->where('id_k_asset', $data);
         $this->db->delete('kategori_asset');
@@ -25,5 +25,55 @@ class Asset_model extends CI_Model
         $this->db->update('kategori_asset', $data, array('id_k_asset' => $oldid)); 
 
     }
+    public function getLokasi()
+    {
+        $query = $this->db->query('SELECT * FROM lokasi');
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function setLokasi($data)
+    {
+        $this->db->insert('lokasi', $data);
+    }
+
+    public function delLokasi($data)
+    {
+        $this->db->where('id_lokasi', $data);
+        $this->db->delete('lokasi');
+
+    }
+
+    public function editLokasi($data, $oldid)
+    {
+        $this->db->update('lokasi', $data, array('id_lokasi' => $oldid)); 
+
+    }
+
+    public function getAsset()
+    {
+        $query = $this->db->query('SELECT * FROM asset');
+        $result = $query->result_array();
+        return $result;
+
+    }
+    public function setAsset($data)
+    {
+        $this->db->insert('asset', $data);
+    }
+
+    public function delAset($data)
+    {
+        $this->db->where('id_asset', $data);
+        $this->db->delete('asset');
+    }
+    public function maxID()
+    {
+        $query = $this->db->query('SELECT MAX(id_asset) FROM asset');
+        $result = $query->result_array();
+        return $result;
+
+    }
+
 
 }
