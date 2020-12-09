@@ -35,10 +35,9 @@ class Asset extends CI_Controller {
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("Asset/index", $data);
-            $this->load->view("templates/dashboard_footer");
-
-            var_dump($this->model->maxID());
-           
+            $this->load->view("templates/dashboard_footer");   
+            
+     
             
         }
        
@@ -93,7 +92,7 @@ class Asset extends CI_Controller {
 
 
             $data = [ 
-                'id_asset' => $this->input->post('idasset'),  
+                'id_asset' => $this->input->post('id_asset'),  
                 'nama_k_asset' => $this->input->post('kategori'),
                 'nama_asset' => $this->input->post('nama_asset'),
                 'merk' => $this->input->post('merk'),
@@ -102,10 +101,7 @@ class Asset extends CI_Controller {
                 'harga' => $this->input->post('harga'),
                 'foto' => $poto
             ];
-            var_dump($data);
-            die;
            $this->model->setAsset($data);
-          
            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Add data Asset </div>');
            redirect("Asset/Asset/index");
 

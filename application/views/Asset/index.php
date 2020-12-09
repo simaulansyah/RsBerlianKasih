@@ -36,10 +36,9 @@
                 <td><?= $a['merk']; ?></td>
                 <td><?= $a['nama_lokasi']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#dtailasetModal<?= $a['id_asset']; ?>"  class="badge badge-success">detail</a>
+                <a href="" data-toggle="modal" data-target="#dtailasetModal<?= $a['id_asset']?>"  class="badge badge-success">detail</a>
                 <a href="" data-toggle="modal" data-target="#edtasetModal<?= $a['id_asset']; ?>"  class="badge badge-primary">edit</a>
                 <a href="<?php echo site_url("Asset/Asset/delAsset/" . $a['id_asset']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
-                
                 </td>
                 </tr>
                 <?php $i++?>
@@ -86,6 +85,11 @@
       <div class="modal-body">
 
       <table class="table" >
+      <tr>
+            <td>ID Asset :</td>
+            <td><input type="text" name="id_asset" id="id_asset" class="form-control" value="<?=$idasset?>" readonly >
+        </td>
+        </tr>
         <tr>
             <td>Kategori Asset :</td>
             <td>
@@ -101,8 +105,6 @@
         <tr>
             <td>Nama Asset :</td>
             <td><input type="text" name="nama_asset" id="nama_asset" class="form-control" >
-            <input type="hidden" class="form-control" id="lastvalueid" name="lastvalueid" value="<?= $idasset['id_asset'] ?>" >
-            <input type="hidden" class="form-control" id="idasset" name="idasset" >
         </td>
         </tr>
         <tr>
@@ -154,8 +156,7 @@
 <!-- modal detail -->
 <?php $i = 1;?>
 <?php foreach($asset as $a ) :?>
-
-<div class="modal fade bd-example-modal-lg" id="dtailasetModal<?= $a['id_asset']; ?>"  tabindex="-1" role="dialog">
+<div class="modal fade bd-example-modal-lg" id="dtailasetModal<?= $a['id_asset']?>"  tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg " role="document">
     <div class="modal-content">
       <div class="modal-header">

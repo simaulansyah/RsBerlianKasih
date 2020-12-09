@@ -70,8 +70,21 @@ class Asset_model extends CI_Model
     public function maxID()
     {
         $query = $this->db->query('SELECT MAX(id_asset) FROM asset');
-        $result = $query->result_array();
-        return $result;
+        $result = $query->row_array();
+        $id = implode("-", $result); //int
+        $urutan = (int)substr($id,4);
+        $urutan++;
+        $huruf = "Ast-";
+        $finalID = $huruf . sprintf("%03s", $urutan);
+        if ($finalID == "Ast-000")
+        {
+        return "Ast-001";
+        }
+        else
+        {
+        return $finalID;
+        
+        }
 
     }
 
