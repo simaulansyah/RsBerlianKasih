@@ -11,14 +11,17 @@
         <a href="" data-toggle="modal" data-target="#tbhAssetModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Asset</a>
         </div>
 
-        <?= form_error('id_k_asset', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
-        <?= form_error('nama_k_asset', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('nama_asset', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('kategori', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('lokasi', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('tahun', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 
         <h5><?= $this->session->flashdata('message'); ?></h5> 
 
         <table class="table table-striped" id="asset">
             <thead>
                 <td>#</td>
+                <td>Id Asset</td>
                 <td>Kategori Asset</td>
                 <td>Nama Asset</td>
                 <td>Merk</td>
@@ -30,7 +33,8 @@
               
             <?php foreach($asset as $a ) :?>
                 <tr>
-                <td><?=$i?></td>    
+                <td><?=$i?></td>   
+                <td><?= $a['id_asset']; ?></td> 
                 <td><?= $a['nama_k_asset']; ?></td>
                 <td><?= $a['nama_asset']; ?></td>
                 <td><?= $a['merk']; ?></td>
@@ -221,3 +225,108 @@
 </div>
 <?php endforeach; ?>
 <!-- akhir isi detail -->
+
+
+
+
+<!-- modal edit  -->
+
+<?php $i = 1;?>
+<?php foreach($asset as $a ) :?>
+<div class="modal fade bd-example-modal-lg" id="edtasetModal<?= $a['id_asset']?>"  tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail Asset</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-- isi edit -->
+<?= form_open_multipart('Asset/Asset/editAsset');?>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+     
+    <td><?= $a['id_asset'] ?></td>
+    <input type="hidden" value="<?= $a['id_asset']?>" id="id_asset" name="id_asset" >
+      <div class="row">
+      <table class="table" >
+      <tr>
+            <td>Nama Aset : </td>
+            <td><input type="text" value="<?= $a['nama_asset']?>" id="nama_asset" name="nama_asset" ></td>
+            <td></td>
+      </tr>
+      <tr>
+            <td>Kategori Aset : </td>
+            <td>
+                    <select name="kategori" id="kategori" class="form-control">
+                    <?php foreach($kategori as $kt) : ?> 
+                    <option <?php if($kt['nama_k_asset'] == $a['nama_k_asset'] ){ echo 'selected="selected"'; } ?> value="<?= $kt['nama_k_asset']; ?>"> <?= $kt['nama_k_asset'] ?> </option> 
+                    <?php endforeach;?>
+                    </select>
+            </td>
+      </tr>
+      <tr>
+            <td>Merk : </td>
+            <td><input type="text" value="<?= $a['merk']?>" id="merk" name="merk" ></td>
+      </tr>
+      <tr>
+            <td>Lokasi : </td>
+            <td>
+                    <select name="nama_lokasi" id="nama_lokasi" class="form-control">
+                    <?php foreach($lokasi as $lk) : ?> 
+                    <option <?php if($lk['nama_lokasi'] == $a['nama_lokasi'] ){ echo 'selected="selected"'; } ?> value="<?= $lk['nama_lokasi']; ?>"> <?= $lk['nama_lokasi'] ?> </option> 
+                    <?php endforeach;?>
+                    </select>
+            </td>
+      </tr>
+      <tr>
+            <td>Tahun Perolehan : </td>
+            <td><input type="text" value="<?= $a['tahun_perolehan']?>" id="tahun_perolehan" name="tahun_perolehan" ></td>
+      </tr>
+      <tr>
+            <td>Harga : </td>
+            <td><input type="text" value="<?= $a['harga']?>" id="harga" name="harga" ></td>
+      </tr>
+      <tr>
+            <td>Umur Aset : </td>
+            <td><input type="text" value="<?= 2020 - $a['tahun_perolehan']. " Tahun";?>" readonly ></td>
+ 
+      </tr>
+     
+      </table>
+      </div>
+    </div>
+    <div class="col-md-4"><img src="<?= base_url('upload/Asset/'). $a['foto']?>"  class="card-img" alt="...">
+    <input type="hidden" id="oldfoto" name="oldfoto" value="<?= $a['foto']?>">
+    <br>
+    <br>
+    <td>
+                                    <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image" value="<?$a['foto']?>" >
+                                    <label class="custom-file-label" for="imagae">Change Foto</label>
+                                </div>
+
+            </td>
+    
+    </div>
+    
+  </div>
+</div>
+
+      
+    <!-- akhir isi edit -->
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+        <button type="submit" id="saveAsset" data-kategori="kategori" data-tahun="tahun"  class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<?php endforeach; ?>
+
+<!-- akhir modal edit -->

@@ -35,9 +35,7 @@ class Asset extends CI_Controller {
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("Asset/index", $data);
-            $this->load->view("templates/dashboard_footer");   
-            
-     
+            $this->load->view("templates/dashboard_footer");  
             
         }
        
@@ -125,6 +123,83 @@ class Asset extends CI_Controller {
 
         }
        
+
+    }
+
+    public function editAsset()
+    {
+
+        $this->form_validation->set_rules('kategori','Kategori','required');
+        $this->form_validation->set_rules('nama_asset', 'Nama Aset', 'required');
+        $this->form_validation->set_rules('nama_lokasi', 'Lokasi', 'required');
+        $this->form_validation->set_rules('tahun_perolehan', 'Tahun', 'required');
+        if ($this->form_validation->run()== false)
+        {
+            $data['idasset'] = $this->model->maxID();
+            $data['asset'] = $this->model->getAsset();
+            $data['kategori'] = $this->model->getKategoriAsset();
+            $data['lokasi'] = $this->model->getLokasi();
+            $data['title'] = "Data Asset";
+            $this->load->view("templates/dashboard_header");
+            $this->load->view("templates/dashboard_sidebar", $data);
+            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("Asset/index", $data);
+            $this->load->view("templates/dashboard_footer");
+
+        } else 
+        {
+            $poto = $_FILES['image']['name'];
+
+            if ($poto)
+            {
+                $config['upload_path'] = './upload/Asset/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size']     = '100';
+                $config['max_width'] = '10000';
+                $config['max_height'] = '10000';
+
+                $this->load->library('upload', $config);
+
+          
+
+                if (!$this->upload->do_upload('image'))
+                {
+
+                   // $error = array('error' => $this->upload->display_errors());
+                   // $this->load->view('upload_form', $error);
+                    echo $this->upload->display_errors();
+                    die;
+                    //echo '<script>alert("gagal upload foto");window.location.href="' . base_url('/Asset/Asset/index') . '";</script>';
+                }else
+                {
+                    $oldpoto = $this->input->post('oldfoto');
+                    $poto = $this->upload->data('file_name');
+                }
+            }
+
+            $oldid = $this->input->post('id_asset');
+
+            $data = [ 
+                'nama_k_asset' => $this->input->post('kategori'),
+                'nama_asset' => $this->input->post('nama_asset'),
+                'merk' => $this->input->post('merk'),
+                'nama_lokasi' => $this->input->post('nama_lokasi'),
+                'tahun_perolehan' => $this->input->post('tahun_perolehan'),
+                'harga' => $this->input->post('harga'),
+                'foto' => $poto
+                
+            ];
+
+            $this->model->editdtAsset($data, $oldid);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Asset </div>');
+            redirect("Asset/Asset/index");
+    
+
+
+        }
+
+     
+    
 
     }
 

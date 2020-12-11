@@ -89,4 +89,10 @@ class Asset_model extends CI_Model
     }
 
 
+    public function EditdtAsset($data, $oldid)
+    {
+        $this->db->update('asset', $data, array('id_asset' => $oldid)); 
+    }
+
+
 }
