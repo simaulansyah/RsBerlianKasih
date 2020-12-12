@@ -212,6 +212,7 @@ class Pegawai extends CI_Controller {
                // $error = array('error' => $this->upload->display_errors());
                // $this->load->view('upload_form', $error);
                 echo $this->upload->display_errors();
+                die;
                 echo '<script>alert("Username yang Anda masukan salah.");window.location.href="' . base_url('pegawai') . '";</script>';
                
             }else
@@ -220,7 +221,7 @@ class Pegawai extends CI_Controller {
                 if($old_image != "default.jpg")
                 {
                    
-                    //unlink(FCPATH . '/upload/profil/user' . $old_image);
+                    unlink(FCPATH.'upload/profil/user/'.$old_image);
                 }
         
                 $poto = $this->upload->data('file_name');
@@ -262,8 +263,8 @@ class Pegawai extends CI_Controller {
                 'status_pernikahan' => $status_pernikahan,
                 'jumlah_anak' => $jumlah_anak,
                 'id_jabatan' => $id_jabatan,
-                'poto' => $this->input->post('old')
             ];
+
             
             $this->pegawai->updatePegawai($data, $oldnip);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Edit data karyawan </div>');

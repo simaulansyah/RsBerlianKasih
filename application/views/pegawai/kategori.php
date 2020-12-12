@@ -24,7 +24,7 @@
         <a href="" data-toggle="modal" data-target="#tbhjbtnModal" class="badge badge-warning"> Tambah Data jabatan </a>
         </div>
 
-        <table id="example" class="table table-bordered ">
+        <table id="kategoriJabatan" class="table table-striped" >
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -78,9 +78,9 @@
             </div>
         </div>
 
-    </div>
+  
     <!---Container Fluid-->
-    </div>
+    
     <!-- Footer -->
 
 

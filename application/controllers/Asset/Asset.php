@@ -148,6 +148,7 @@ class Asset extends CI_Controller {
 
         } else 
         {
+            $oldid = $this->input->post('id_asset');
             $poto = $_FILES['image']['name'];
 
             if ($poto)
@@ -173,11 +174,34 @@ class Asset extends CI_Controller {
                 }else
                 {
                     $oldpoto = $this->input->post('oldfoto');
+                     //unlink(FCPATH.'upload/Asset/'.$oldpoto);
+                  
+                    //unlink(base_url('upload/Asset/'.$oldpoto));
                     $poto = $this->upload->data('file_name');
+                   
+
+                    // jika foto ada
+
+                    $data = [ 
+                        'nama_k_asset' => $this->input->post('kategori'),
+                        'nama_asset' => $this->input->post('nama_asset'),
+                        'merk' => $this->input->post('merk'),
+                        'nama_lokasi' => $this->input->post('nama_lokasi'),
+                        'tahun_perolehan' => $this->input->post('tahun_perolehan'),
+                        'harga' => $this->input->post('harga'),
+                        'foto' => $poto
+                        
+                    ];
+                    $this->model->editdtAsset($data, $oldid);
+                    unlink(FCPATH.'upload/Asset/'.$oldpoto);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Asset </div>');
+                    redirect("Asset/Asset/index");
                 }
             }
 
-            $oldid = $this->input->post('id_asset');
+            
+
+            // jika foto tidak ada
 
             $data = [ 
                 'nama_k_asset' => $this->input->post('kategori'),
@@ -186,7 +210,7 @@ class Asset extends CI_Controller {
                 'nama_lokasi' => $this->input->post('nama_lokasi'),
                 'tahun_perolehan' => $this->input->post('tahun_perolehan'),
                 'harga' => $this->input->post('harga'),
-                'foto' => $poto
+                
                 
             ];
 

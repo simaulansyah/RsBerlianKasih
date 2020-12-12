@@ -39,10 +39,9 @@
                 <td>Jenis</td>
                 <td>aksi</td>
         </thead>
+        <tbody>
         <?php $i = 1;?>
             <?php foreach($ruangan as $s) :?>
-
-        <tbody>
         <tr>
                 <td><?=$i?></td>    
                 <td><?= $s['id_ruangan']; ?></td>

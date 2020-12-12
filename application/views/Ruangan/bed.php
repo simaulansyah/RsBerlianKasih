@@ -20,7 +20,9 @@
         <?= form_error('status', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         
 
-        <h5><?= $this->session->flashdata('message'); ?></h5> 
+        <h5><?= $this->session->flashdata('message'); ?></h5>
+
+    
 
         <table class="table table-striped" id="ruangan">
         <thead>
@@ -33,10 +35,9 @@
                 <td>Status</td>
                 <td>aksi</td>
         </thead>
-        <?php $i = 1;?>
-          
-<?php foreach ($bed as $b) : ?>
         <tbody>
+        <?php $i = 1;?>
+<?php foreach ($bed as $b) : ?>
         <tr>
         <td><?= $i?></td>
         <td><?= $b['id_kasur']?></td>
@@ -52,9 +53,11 @@
                 </td>
                 </tr>
                 <?php $i++?>
-<?php endforeach;?>
+                <?php endforeach;?>
         </tbody>
+      
     </table>
+ 
 
   <!-- Modal Logout -->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
@@ -77,9 +80,9 @@
             </div>
         </div>
 
-    </div>
+    
     <!---Container Fluid-->
-    </div>
+    
     <!-- Footer -->
 
 

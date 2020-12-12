@@ -19,8 +19,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#asset').DataTable();
 } );
-
-
+$(document).ready(function() {
+    $('#kategoriJabatan').DataTable();
+} );
 
 
 
