@@ -25,6 +25,7 @@ class Bed extends CI_Controller {
             redirect("auth");
         } else
         {
+            $data ['total'] = $this->model->getRowKasur();
             $data['stat'] = $this->model->getStatus();
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();

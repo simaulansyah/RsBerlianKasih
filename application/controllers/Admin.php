@@ -6,6 +6,7 @@ class Admin extends CI_Controller {
     {
         parent::__construct();
         //load model admin
+        $this->load->model('Ruangan_model', 'modelRuangan');
         $this->load->model('Auth_model', 'model');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
@@ -24,7 +25,7 @@ class Admin extends CI_Controller {
         } else
         {
             $data['title'] = "Admin";
-
+            $data['totalKasur'] = $this->modelRuangan->getRowKasur();
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);

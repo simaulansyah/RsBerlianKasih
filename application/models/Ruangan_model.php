@@ -54,6 +54,15 @@ class Ruangan_model extends CI_Model
 
     }
 
+    public function getRowKasur () 
+    {
+        $query = $this->db->query('SELECT COUNT(id_kasur) FROM kasur');
+        $result = $query->result_array();
+        return $result;
+
+
+    }
+
 
 
 }
