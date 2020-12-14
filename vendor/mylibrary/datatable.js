@@ -22,6 +22,15 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#kategoriJabatan').DataTable();
 } );
+$(document).ready(function() {
+    $('#dokter').DataTable();
+} );
+$(document).ready(function() {
+    $('#datatabel').DataTable();
+} );
+
+
+
 
 
 

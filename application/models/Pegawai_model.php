@@ -71,6 +71,13 @@ class Pegawai_model extends CI_Model
     {
         $this->db->update('jabatan', $data, array('id_jabatan' => $oldid)); 
     }
+    public function getRowPegawai() 
+    {
+        //$query = $this->db->query('SELECT COUNT(id_kasur) FROM kasur');
+        $query = $this->db->query('SELECT * FROM pegawai');
+        $result = $query->num_rows();
+        return $result;
+    }
 
    
 }

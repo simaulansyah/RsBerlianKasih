@@ -128,8 +128,8 @@
             <td>
             <select name="status" id="status" class="form-control">
                             <option value="" >Pilih Status Kamar</option> 
-                            <option value="1"> isi </option> 
-                            <option value="0"> kosong </option>   
+                            <option value=1> isi </option> 
+                            <option value=0> kosong </option>   
                         </select>
                 
             </td>

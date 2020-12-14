@@ -45,7 +45,7 @@ class Ruangan_model extends CI_Model
 
     public function getStatus()
     {
-        $st = array('0','1');
+        $st = array(0,1);
         return $st;
     }
     public function editKasur($data, $oldid)
@@ -54,13 +54,24 @@ class Ruangan_model extends CI_Model
 
     }
 
-    public function getRowKasur () 
+    public function getRowKasur() 
     {
-        $query = $this->db->query('SELECT COUNT(id_kasur) FROM kasur');
-        $result = $query->result_array();
+        //$query = $this->db->query('SELECT COUNT(id_kasur) FROM kasur');
+        $query = $this->db->query('SELECT * FROM kasur');
+        $result = $query->num_rows();
         return $result;
-
-
+    }
+    public function getStatusKasurisi()
+    { 
+        $query = $this->db->query('SELECT status FROM kasur where status=1');
+        $result = $query->num_rows();
+        return $result;
+    }
+    public function getStatusKasurKosong()
+    { 
+        $query = $this->db->query('SELECT status FROM kasur where status=0');
+        $result = $query->num_rows();
+        return $result;
     }
 
 

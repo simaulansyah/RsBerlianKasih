@@ -29,6 +29,8 @@
             <a class="collapse-item active " href="<?= base_url('pegawai') ?>">Data Pegawai</a>
             <a class="collapse-item" href="<?= base_url('pegawai/kategori') ?>">Kategori Jabatan & Gaji</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Data Penggajian</a>
+            <a class="collapse-item" href="<?= base_url('Dokter/Dokter') ?>">Data Dokter</a>
+            <a class="collapse-item" href="<?= base_url('Dokter/Spesialisasi') ?>">Data Spesialisasi</a>
           </div>
         </div>
       </li>

@@ -95,4 +95,21 @@ class Asset_model extends CI_Model
     }
 
 
+    public function getRowAsset() 
+    {
+        //$query = $this->db->query('SELECT COUNT(id_kasur) FROM kasur');
+        $query = $this->db->query('SELECT * FROM asset');
+        $result = $query->num_rows();//get total row
+        return $result;
+    }
+
+    public function getJumlahAsset()
+    {
+        $query = $this->db->query('SELECT SUM(harga) FROM asset');
+        $result = $query->row_array();//get string
+        return $result;
+
+    }
+
+
 }

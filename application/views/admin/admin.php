@@ -17,69 +17,142 @@
         </div>
 
         <div class="row mb-3">
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Card Tempat Tidur -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
+
+                    <div class="col-auto">
+                                <i class="fas fa-bed fa-2x text-primary"></i>
+                                <a href="<?= base_url('Ruangan/Bed') ?>">
+                                <span class="text-success mr-1"></i>   Data Tempat Tidur</span></a>
+                            </div>
+                            <hr>
                         <div class="row align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Total Kasur</div>
-                                <?php foreach($totalKasur as $tk) :?>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $tk;?></div>
-                                <?php endforeach;?>
+                            
+                        <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1"> isi</div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $statusKasurisi?></div>
+                
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                    <span>Since last month</span>
+                                  
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-primary"></i>
+
+                            <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Kosong </div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $statusKasurKosong?></div>
+                
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    
+                                </div>
                             </div>
+
+                            <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Total</div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalKasur?></div>
+                
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                  
+                                    
+                                </div>
+                            </div>
+                        
+                          
+                        
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Earnings (Annual) Card Example -->
+
+            <!-- Card Asset -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+
+                    <div class="col-auto">
+                                <i class="fas fa-warehouse fa-2x text-primary"></i>
+                                <a href="<?= base_url('Asset/Asset') ?>">
+                                <span class="text-success mr-1"></i> Data Asset</span></a>
+                            </div>
+                            <hr>
+                        <div class="row align-items-center">
+                            
+                        <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1"> Total Asset</div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalAsset?></div>
+                
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                                    <span>Since last years</span>
+                                  
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-shopping-cart fa-2x text-success"></i>
+
+                            <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1"> Jumlah Asset </div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= "Rp ". number_format($jumlahAsset['SUM(harga)'],0, ".", ".");?></div>
+                
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    
+                                </div>
                             </div>
+
+                        
+                          
+                        
                         </div>
                     </div>
                 </div>
             </div>
+
+            
             <!-- New User Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">New User</div>
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+
+                    <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-primary"></i>
+                                <a href="<?= base_url('pegawai') ?>">
+                                <span class="text-success mr-1"></i> Data Karyawan</span></a>
+                            </div>
+                            <hr>
+                        <div class="row align-items-center">
+                            
+                        <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1"> jumlah pegawai</div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlahPegawai?></div>
+                
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
-                                    <span>Since last month</span>
+                                  
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-users fa-2x text-info"></i>
+
+                            <div class="col mr-1">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1"> Jumlah Dokter </div>
+                            
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= "brapa";?></div>
+                
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    
+                                </div>
                             </div>
+
+                        
+                          
+                        
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Pending Requests Card Example -->
+
+          
+            <!-- Pending Requests Card Example  -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">

@@ -8,6 +8,8 @@ class Admin extends CI_Controller {
         //load model admin
         $this->load->model('Ruangan_model', 'modelRuangan');
         $this->load->model('Auth_model', 'model');
+        $this->load->model('Pegawai_model', 'modelPegawai');
+        $this->load->model('Asset_model', 'modelAsset');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
 
@@ -26,6 +28,13 @@ class Admin extends CI_Controller {
         {
             $data['title'] = "Admin";
             $data['totalKasur'] = $this->modelRuangan->getRowKasur();
+            $data['statusKasurisi'] = $this->modelRuangan->getStatusKasurisi(); 
+            $data['statusKasurKosong'] = $this->modelRuangan->getStatusKasurKosong(); 
+            $data['totalAsset'] = $this->modelAsset->getRowAsset();
+            $data['jumlahAsset'] = $this->modelAsset->getJumlahAsset();
+            $data['jumlahPegawai'] = $this->modelPegawai->getRowPegawai();
+
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
