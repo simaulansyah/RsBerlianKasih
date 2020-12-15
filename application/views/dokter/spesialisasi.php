@@ -31,9 +31,8 @@
                 <td><?= $s['id_spesialisasi']; ?></td> 
                 <td><?= $s['nama_spesialisasi']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#dtailasetModal<?= $s['id_dokter']?>"  class="badge badge-success">detail</a>
-                <a href="" data-toggle="modal" data-target="#edtasetModal<?= $s['id_dokter']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("Asset/Asset/delAsset/" . $s['id_dokter']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="" data-toggle="modal" data-target="#edtSpsModal<?= $s['id_spesialisasi']; ?>"  class="badge badge-primary">edit</a>
+                <a href="<?php echo site_url("Dokter/Spesialisasi/delSpesialisasi/" . $s['id_spesialisasi']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 </td>
                 </tr>
                 <?php $i++?>
@@ -79,6 +78,47 @@
     </div>
   </div>
 </div>
+<!-- akhir tambah data -->
+
+
+<!-- edit data -->
+<?php $i=0?>
+    <?php foreach($spesialisasi as $s) : $i++ ?>
+<div class="modal fade" id="edtSpsModal<?= $s['id_spesialisasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtSpsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edtSpsModalLabel">Edit Data Spesialisasi </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <Form action="<?= base_url('Dokter/Spesialisasi/editSpesialisasi'); ?>" method="POST">
+      <div class="modal-body">
+
+      <table class="table" >
+        <tr>
+            <td>ID Spesialisasi :</td>
+            <input type="hidden" name="oldid" id="oldid" value="<?= $s['id_spesialisasi']?>">
+            <td><input type="text" name="id_spesialisasi" class="form-control" value="<?=$s['id_spesialisasi']?>"  ></td>
+        </tr>
+        <tr>
+            <td>Nama Spesialisasi :</td>
+            <input type="hidden" name="oldname" id="oldname" value="<?= $s['nama_spesialisasi']?>">
+            <td><input type="text" name="nama_spesialisasi" class="form-control"  value="<?=$s['nama_spesialisasi']?>" ></td>
+        </tr>
+      </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</Form>
+<?php endforeach;?>
 
 
 
@@ -87,6 +127,7 @@
 
 
 
+<!-- akhir edit data -->
 
 
                <!-- Modal Logout -->

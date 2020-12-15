@@ -9,10 +9,11 @@ class Admin extends CI_Controller {
         $this->load->model('Ruangan_model', 'modelRuangan');
         $this->load->model('Auth_model', 'model');
         $this->load->model('Pegawai_model', 'modelPegawai');
+        $this->load->model('Dokter_model', 'modelDokter');
         $this->load->model('Asset_model', 'modelAsset');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
-
+        
         //sesion untuk mengamankan ketika di back tidak login lagi
         if (!$this->session->userdata('user_id')) {
 			redirect('auth');
@@ -33,6 +34,7 @@ class Admin extends CI_Controller {
             $data['totalAsset'] = $this->modelAsset->getRowAsset();
             $data['jumlahAsset'] = $this->modelAsset->getJumlahAsset();
             $data['jumlahPegawai'] = $this->modelPegawai->getRowPegawai();
+            $data['jumlahDokter'] = $this->modelDokter->getRowDokter();
 
 
             $this->load->view("templates/dashboard_header");

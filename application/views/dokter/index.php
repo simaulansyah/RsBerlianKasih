@@ -44,9 +44,9 @@
                 <td><?= $d['lokasi_praktek']; ?></td>
                 <td><?= $d['jam_praktek']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#dtailasetModal<?= $d['id_dokter']?>"  class="badge badge-success">detail</a>
+                <a href="" data-toggle="modal" data-target="#dtailDokterModal<?= $d['id_dokter']?>"  class="badge badge-success">detail</a>
                 <a href="" data-toggle="modal" data-target="#edtasetModal<?= $d['id_dokter']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("Asset/Asset/delAsset/" . $d['id_dokter']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="<?php echo site_url("Dokter/Dokter/delDokter/" . $d['id_dokter']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 </td>
                 </tr>
                 <?php $i++?>
@@ -68,7 +68,7 @@
                         </button>
                     </div>
 
-                    <?= form_open_multipart('Dokter/tambahDokter');?>
+                    <?= form_open_multipart('Dokter/Dokter/tambahDokter');?>
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="id_dokter" name="id_dokter" placeholder="ID Dokter">
@@ -93,10 +93,19 @@
                                 <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Telepon">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="spesialisasi" name="spesialisasi" placeholder="Spesialisasi">
+                            <select name="spesialisasi" id="spesialisasi" class="form-control">
+                            <option value="">Pilih Spesialisasi</option>
+                            <?php foreach($spesialisasi as $s) : ?> 
+                            <option><?= $s['nama_spesialisasi']?> </option>
+                            <?php endforeach;?>     
+                        </select>
+                               
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="lokasi_praktek" name="lokasi_praktek" placeholder="Lokasi Praktek">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="jam_praktek" name="jam_praktek" placeholder="Jam Praktek">
                             </div>
                             <div class="form-group">
                                 <div class="custom-file">
@@ -104,8 +113,6 @@
                                     <label class="custom-file-label" for="imagae">Upload Foto Dokter</label>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -115,8 +122,83 @@
                 </div>
             </div>
         </div>
+        <!-- akhir tambah -->
+
+<!-- modal detail -->
+<?php $i = 1;?>
+<?php foreach($dokter as $d ) :?>
+<div class="modal fade bd-example-modal-lg" id="dtailDokterModal<?= $d['id_dokter']?>"  tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail Dokter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-- isi detail -->
 
 
+    <div class="team-boxed">
+        <div class="container">
+            <div class="intro">
+            
+                <h6 class="text-center"><div class="box"><img class="rounded-circle" src="<?=base_url('upload/profil/Dokter/').$d['foto']?>">
+                        <h3 class="name"><?= $d['nama_dokter']?></h3>
+                        <h5 class="name"><?= $d['id_dokter']?></h5>
+                        <h5 class="name"><?= "Spesialis : ". $d['spesialisasi']?></h5>
+
+                        <table class="table table-striped" >
+                            <thead>
+                            <td>Telepon</td>
+                            <td>Alamat</td>
+                            <td>Tanggal Lahir</td>
+                            <td>Gender</td>
+                            <td>Lokasi Praktek</td>
+                            <td>Jam Praktek</td>
+
+                            </thead>
+                            <tbody>
+                            <td><?= $d['telepon']; ?></td>
+                            <td><?= $d['alamat']; ?></td>
+                            <td><?= $d['tanggal_lahir']; ?></td>
+                            <td><?= $d['jenis_kelamin']; ?></td>
+                            <td><?= $d['lokasi_praktek']; ?></td>
+                            <td><?= $d['jam_praktek']; ?></td>
+
+                            </tbody>
+                            <tr>
+
+                            </tr>
+
+                        </table>
+                       
+                    </div></h6>
+                <p class="text-center"><br></p>
+            </div>
+       
+                    
+                
+            
+        </div>
+    </div>
+  
+
+
+
+ <!-- akhir isi detail -->
+ </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+<!-- akhir isi detail -->
+
+      <!-- akhir detail -->
 
 
 

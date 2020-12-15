@@ -136,7 +136,7 @@
                             <div class="col mr-1">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1"> Jumlah Dokter </div>
                             
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= "brapa";?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlahDokter;?></div>
                 
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     
