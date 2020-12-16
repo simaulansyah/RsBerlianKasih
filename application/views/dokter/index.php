@@ -10,6 +10,7 @@
         <a href="" data-toggle="modal" data-target="#tbhDokterModal" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Dokter</a>
         </div>
 
+
         <?= form_error('id_dokter', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('nama_dokter', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('telepon', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
@@ -17,6 +18,7 @@
         <?= form_error('spesialisasi', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('lokasi_praktek', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('jam_praktek', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('tgl', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 
         <h5><?= $this->session->flashdata('message'); ?></h5> 
 
@@ -45,8 +47,8 @@
                 <td><?= $d['jam_praktek']; ?></td>
                 <td>
                 <a href="" data-toggle="modal" data-target="#dtailDokterModal<?= $d['id_dokter']?>"  class="badge badge-success">detail</a>
-                <a href="" data-toggle="modal" data-target="#edtasetModal<?= $d['id_dokter']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("Dokter/Dokter/delDokter/" . $d['id_dokter']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="" data-toggle="modal" data-target="#edtDokterModal<?= $d['id_dokter']; ?>"  class="badge badge-primary">edit</a>
+                <a href="<?php echo site_url("Dokter/Dokter/delDokter/" . $d['id_dokter']."/".$d['foto']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 </td>
                 </tr>
                 <?php $i++?>
@@ -141,52 +143,52 @@
 
 
     <div class="team-boxed">
-        <div class="container">
-            <div class="intro">
-            
-                <h6 class="text-center"><div class="box"><img class="rounded-circle" src="<?=base_url('upload/profil/Dokter/').$d['foto']?>">
-                        <h3 class="name"><?= $d['nama_dokter']?></h3>
-                        <h5 class="name"><?= $d['id_dokter']?></h5>
-                        <h5 class="name"><?= "Spesialis : ". $d['spesialisasi']?></h5>
+    <div class="container">
+  <div class="row">
+    <div class="col-sm">
+    
 
-                        <table class="table table-striped" >
-                            <thead>
-                            <td>Telepon</td>
-                            <td>Alamat</td>
-                            <td>Tanggal Lahir</td>
-                            <td>Gender</td>
-                            <td>Lokasi Praktek</td>
-                            <td>Jam Praktek</td>
+    <table class="table" >
+        <tr>
+        <td style="width: 40.66%" >Lokasi Praktek :</td>
+        <td><?= $d['lokasi_praktek']?></td>
+        </tr>
+        <tr>
+        <td> Jam Praktek :</td>
+            <td><?= $d['jam_praktek']?></td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir :</td>
+            <td><?= $d['tanggal_lahir']?></td>
+        </tr>
+        <tr>
+            <td>Gender :</td>
+            <td><?= $d['jenis_kelamin']?></td>
+        </tr>
+        <tr>
+      <td>Telepon :</td>
+      <td><?= $d['telepon']?></td>  
+        </tr>
+        <tr>
+        <td>Alamat :</td>
+            <td><?= $d['alamat'] ?></td> 
+        </tr>
+      </table>
 
-                            </thead>
-                            <tbody>
-                            <td><?= $d['telepon']; ?></td>
-                            <td><?= $d['alamat']; ?></td>
-                            <td><?= $d['tanggal_lahir']; ?></td>
-                            <td><?= $d['jenis_kelamin']; ?></td>
-                            <td><?= $d['lokasi_praktek']; ?></td>
-                            <td><?= $d['jam_praktek']; ?></td>
-
-                            </tbody>
-                            <tr>
-
-                            </tr>
-
-                        </table>
-                       
-                    </div></h6>
-                <p class="text-center"><br></p>
-            </div>
-       
-                    
-                
-            
-        </div>
+      
     </div>
-  
+    <div class="col-sm">
+    <img class="img-thumbnail"  style="float: right;"  src="<?=base_url('upload/profil/Dokter/').$d['foto']?>">
+    <div style="clear: right">
+    <h3 class="text-right"><?= $d['nama_dokter']?></h3>
+    <h5 class="text-right"><?= "ID Dokter : ". $d['id_dokter']?></h5>
+    <h5 class="text-right"><?= "Spesialis : ". $d['spesialisasi']?></h5>
+</div>   
+    </div>
+  </div>
+</div>
 
-
-
+    </div>
  <!-- akhir isi detail -->
  </div>
       <div class="modal-footer">
@@ -196,9 +198,129 @@
   </div>
 </div>
 <?php endforeach; ?>
-<!-- akhir isi detail -->
 
       <!-- akhir detail -->
+
+
+      <!-- modal edit -->
+      <?php $i = 1;?>
+<?php foreach($dokter as $d ) :?>
+<div class="modal fade bd-example-modal-lg" id="edtDokterModal<?= $d['id_dokter']; ?>"  tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Dokter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-- isi edit -->
+<?= form_open_multipart('Dokter/Dokter/editDokter');?>
+
+    <div class="team-boxed">
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    
+    <table class="table" >
+    <tr>
+    <td>ID Dokter</td>
+    <input type="hidden" name="oldid" id="oldid" value="<?= $d['id_dokter']?>" >
+        <td><input type="text" class="form-control" name="id_dokter" id="id_dokter" value="<?= $d['id_dokter']?>"></td>
+        </tr>
+        <tr>
+        <td>Nama Dokter</td>
+       <td> <input type="text" class="form-control" name="nama_dokter" id="nama_dokter" value="<?= $d['nama_dokter']?>"></td>
+        </tr>
+        <tr>
+            <td>Spesialisasi</td>
+            <td>
+                <select name="spesialisasi" id="spesialisasi" class="form-control">
+                    <?php foreach($spesialisasi as $s) : ?> 
+                    <option <?php if($s['nama_spesialisasi'] == $d['spesialisasi'] ){ echo 'selected="selected"'; } ?> value="<?= $s['nama_spesialisasi']; ?>"> <?= $s['nama_spesialisasi'] ?> </option> 
+                    <?php endforeach;?>
+                    </select>
+                </td>
+        </tr>
+        <tr>
+        <td style="width: 40.66%" >Lokasi Praktek :</td>
+        <td><input type="text" name="lokasi_praktek" class="form-control" value="<?= $d['lokasi_praktek']?>"></td>
+        </tr>
+        <tr>
+        <td> Jam Praktek :</td>
+        <td> <input type="text" name="jam_praktek" class="form-control" value="<?= $d['jam_praktek']?>"> </td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir :</td>
+            <td>  <input type="text" name="tgl" class="form-control" value="<?= $d['tanggal_lahir']?>"> </td>
+        </tr>
+        <tr>
+            <td>Gender :</td>
+            <td><select name="gender" id="gender" class="form-control">
+            <?php for($i=0;$i<count($gender);$i++){ ?> 
+            <option <?php if($gender[$i] == $d['jenis_kelamin'] ){ echo 'selected="selected"'; } ?> value="<?= $gender[$i]; ?>"> <?= $gender[$i]; ?> </option> 
+            <?php }?>
+            </select>            
+        </td>
+
+        </tr>
+        <tr>
+      <td>Telepon :</td>
+      <td> <input type="text" name="telepon" class="form-control" value="<?= $d['telepon']?>"> </td>
+        </tr>
+        <tr>
+        <td>Alamat :</td>
+        <td> <textarea class="form-control" id="alamat" name="alamat" rows="3">
+        <?= $d['alamat'] ?>
+    </textarea></td>
+        <!-- <td>  <input type="text" name="idruangan" class="form-control" "></td> -->
+
+        </tr>
+      </table>
+
+    </div>
+    <div class="col-sm">
+    <input type="hidden" name="old"  id="old" value="<?=$d['foto']; ?>">
+    <img class="img-thumbnail"  style="float: right;"  src="<?=base_url('upload/profil/Dokter/').$d['foto']?>">
+    <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image" value="<?$d['foto']?>" >
+                                    <label class="custom-file-label" for="imagae">Change Foto</label>
+                                </div>
+    <div style="clear: right">
+    <table class="table" >
+        
+    
+</table>
+</div>   
+    </div>
+  </div>
+</div>
+
+    </div>
+ <!-- akhir isi edit -->
+ </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<?php endforeach; ?>
+<!-- akhir edit -->
+
+
+
+
+
+
+
+
+
+
 
 
 

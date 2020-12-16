@@ -107,8 +107,9 @@ class Asset extends CI_Controller {
 
     }
 
-    public function delAsset($data)
+    public function delAsset($data,$image)
     {
+        unlink(FCPATH.'upload/Asset/'.$image);
         $this->model->delAset($data);
         $error = $this->db->error();
         if ($error['code'] != 0 )

@@ -42,7 +42,7 @@
                 <td>
                 <a href="" data-toggle="modal" data-target="#dtailasetModal<?= $a['id_asset']?>"  class="badge badge-success">detail</a>
                 <a href="" data-toggle="modal" data-target="#edtasetModal<?= $a['id_asset']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("Asset/Asset/delAsset/" . $a['id_asset']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="<?php echo site_url("Asset/Asset/delAsset/" . $a['id_asset']."/".$a['foto']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 </td>
                 </tr>
                 <?php $i++?>

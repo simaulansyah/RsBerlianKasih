@@ -51,4 +51,10 @@ class Dokter_model extends CI_Model
         return $result;
     }
 
+    public function updateDokter($data, $oldid)
+    {
+        $this->db->update('dokter', $data, array('id_dokter' => $oldid));    
+
+    }
+
 }
