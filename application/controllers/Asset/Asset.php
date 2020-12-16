@@ -86,7 +86,7 @@ class Asset extends CI_Controller {
                 {
                     $poto = $this->upload->data('file_name');
                 }
-            }
+                //jika ada foto
 
 
             $data = [ 
@@ -103,13 +103,42 @@ class Asset extends CI_Controller {
            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Add data Asset </div>');
            redirect("Asset/Asset/index");
 
+
+
+            } else // jika tidak ada gunakan default foto
+            {
+
+
+            $data = [ 
+                'id_asset' => $this->input->post('id_asset'),  
+                'nama_k_asset' => $this->input->post('kategori'),
+                'nama_asset' => $this->input->post('nama_asset'),
+                'merk' => $this->input->post('merk'),
+                'nama_lokasi' => $this->input->post('lokasi'),
+                'tahun_perolehan' => $this->input->post('tahun'),
+                'harga' => $this->input->post('harga'),
+                'foto' => "defaultasset.png"
+            ];
+           $this->model->setAsset($data);
+           $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Add data Asset </div>');
+           redirect("Asset/Asset/index");
+
+
+
+            } 
+
+
+
         }
 
     }
 
     public function delAsset($data,$image)
     {
+        if($image != "defaultasset.png")
+        {
         unlink(FCPATH.'upload/Asset/'.$image);
+        }
         $this->model->delAset($data);
         $error = $this->db->error();
         if ($error['code'] != 0 )
@@ -176,10 +205,14 @@ class Asset extends CI_Controller {
                 {
                     $oldpoto = $this->input->post('oldfoto');
                      //unlink(FCPATH.'upload/Asset/'.$oldpoto);
+
+                     if($oldpoto != "defaultasset.png")
+                     {
+                     unlink(FCPATH.'upload/Asset/'.$oldpoto);
+                     }
                   
-                    //unlink(base_url('upload/Asset/'.$oldpoto));
-                    $poto = $this->upload->data('file_name');
                    
+                    $poto = $this->upload->data('file_name');
 
                     // jika foto ada
 
@@ -194,7 +227,7 @@ class Asset extends CI_Controller {
                         
                     ];
                     $this->model->editdtAsset($data, $oldid);
-                    unlink(FCPATH.'upload/Asset/'.$oldpoto);
+                    
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Asset </div>');
                     redirect("Asset/Asset/index");
                 }

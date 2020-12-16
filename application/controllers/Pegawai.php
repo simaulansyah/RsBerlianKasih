@@ -130,8 +130,14 @@ class Pegawai extends CI_Controller {
         
     }
 
-    public function hapusKaryawan($nip)
+    public function hapusKaryawan($nip, $old_image)
     {
+        if($old_image != "default.jpg")
+                {
+                   
+                    unlink(FCPATH.'upload/profil/user/'.$old_image);
+                }
+
        $this->pegawai->DelPegawai($nip);
        $error = $this->db->error();
         if ($error['code'] != 0 )

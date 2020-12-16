@@ -49,7 +49,7 @@
                 <td>
                 <a href="" data-toggle="modal" data-target="#dtlPgwModal<?= $p['nip']; ?>" class="badge badge-success">detail</a>
                 <a href="" data-toggle="modal" data-target="#edtPgwModal<?= $p['nip']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("pegawai/hapusKaryawan/" . $p['nip']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="<?php echo site_url("pegawai/hapusKaryawan/" . $p['nip']."/".$p['poto']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 
                 </td>
                 </tr>
