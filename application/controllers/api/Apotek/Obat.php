@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . 'libraries/Format.php';
 
-class Ruangan extends REST_Controller {
+class Obat extends REST_Controller {
 
     function __construct()
     {
@@ -20,17 +20,14 @@ class Ruangan extends REST_Controller {
         $this->methods['users_post']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['users_delete']['limit'] = 50; // 50 requests per hour per user/key
 
-        $this->load->model('Ruangan_model', 'model');
+        $this->load->model('Apotek_model', 'model');
         //$this->load->model('Ruangan_model', 'ruangan');
     }
 
-    public function ruangan_get()
+    public function index_get()
     {
 
-        $data = $this->model->getRuangan();
-
-
-
+        $data = $this->model->getSuplier();
         //get parameter
         $id = $this->get('id');
         if ($id === null)
@@ -43,6 +40,21 @@ class Ruangan extends REST_Controller {
 
         }
 
+    }
+
+    public function index_post()
+    {
+        
+        
+        $arr = json_decode(file_get_contents("php://input"));
+       
+        if (empty($arr->id_suplier) OR empty($arr->nama_suplier)){
+            echo "Submit gagal! Kolom barang / stok tidak boleh kosong.";
+        } else {
+            echo "Submit berhasil! Stok barang dengan nama <b>".$arr->id_suplier."</b> ditambah sebanyak <b>".$arr->nama_suplier."</b>.";
+            $this->model->setSuplier($arr);
+        }
+        
     }
 
 }

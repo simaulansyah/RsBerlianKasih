@@ -55,6 +55,7 @@
             <a class="collapse-item" href="buttons.html">Penjualan</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Data Obat</a>
             <a class="collapse-item" href="<?= base_url('gaji') ?>">Kategori Data Obat</a>
+            <a class="collapse-item" href="<?= base_url('Apotek/Obat/Suplier') ?>">Suplier Data Obat</a>
           </div>
         </div>
       </li>
