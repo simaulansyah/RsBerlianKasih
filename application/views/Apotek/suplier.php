@@ -13,6 +13,8 @@
         
         <?= form_error('id_suplier', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('nama_suplier', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('alamat_suplier', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+
 
 
         <h5><?= $this->session->flashdata('message'); ?></h5> 
@@ -25,6 +27,7 @@
                 <td>Nama Suplier</td>
                 <td>Alamat Suplier</td>
                 <td>Telepon Suplier</td>
+                <td>opsi</td>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +38,11 @@
               <td><?= $sup['id_suplier']?></td>  
               <td><?= $sup['nama_suplier']?></td>  
               <td><?= $sup['alamat_suplier']?></td>  
-              <td><?= $sup['telepon_suplier']?></td>  
+              <td><?= $sup['telepon_suplier']?></td> 
+              <td>
+              <a href="" data-toggle="modal" data-target="#edtSplrModal<?= $sup['id_suplier']; ?>"  class="badge badge-primary">edit</a>
+              <a href="<?=site_url("Apotek/Obat/hapusSuplier/" . $sup['id_suplier']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+              </td> 
                
             </tr>
             
@@ -112,3 +119,56 @@
   </div>
 </div>
 <!-- akhir modal tambah -->
+
+
+        <!-- modal edit -->
+        <?php $i = 1;?>
+<?php foreach($suplier as $sup ) :?>
+  
+        <div class="modal fade" id="edtSplrModal<?= $sup['id_suplier']; ?>" tabindex="-1" role="dialog" aria-labelledby="tedtSplrModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edtSplrModalLabel">Edit Data Suplier </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <Form action="<?= base_url('Apotek/Obat/editSuplier'); ?>" method="POST">
+      <div class="modal-body">
+
+      <table class="table" >
+      <tr>
+            <td>ID Suplier :</td>
+            <input type="hidden" name="oldid" id="oldid" value="<?=$sup['id_suplier']?>" >
+            <td><input type="text" name="id_suplier" id="id_suplier" class="form-control" value="<?=$sup['id_suplier']?>" >
+        </td>
+        </tr>
+        <tr>
+            <td>Nama Suplier :</td>
+            <input type="hidden" name="oldname" id="oldname" value="<?=$sup['nama_suplier']?>" >
+            <td><input type="text" name="nama_suplier" id="nama_suplier" class="form-control" value="<?=$sup['nama_suplier']?>"  >
+        </td>
+        </tr>
+        <tr>
+            <td>Alamat Supilier :</td>
+            <td><input type="text" name="alamat_suplier" id="alamat_suplier" class="form-control" value="<?=$sup['alamat_suplier']?>" ></td>
+        </tr>
+        <tr>
+            <td>Telepon :</td>
+            <td><input type="text" name="telepon_suplier" id="telepon_suplier" class="form-control" value="<?=$sup['telepon_suplier']?>"  ></td>
+        </tr>
+      </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit"  class="btn btn-primary">Save changes</button>
+      </div>
+      </Form>
+    </div>
+  </div>
+</div>
+<?php $i++?>
+<?php endforeach; ?>
+<!-- akhir modal edit -->

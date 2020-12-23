@@ -36,17 +36,44 @@ class Obat extends REST_Controller {
             $this->response([
                 'status' => true,
                 'data' => $data
-            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
-
+            ], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+            
         }
 
     }
 
     public function index_post()
     {
-        
-        
+
         $arr = json_decode(file_get_contents("php://input"));
+       if ($arr == NULL) {
+                //proses client mobile
+        $data = array(
+            'id_suplier'    => $this->input->post('id_suplier'),
+            'nama_suplier'  => $this->input->post('nama_suplier'),
+            'alamat_suplier'=> $this->input->post('alamat_suplier'),
+            'telepon_suplier'=> $this->input->post('telepon_suplier')
+        );
+
+        if ($this->model->setSuplier($data) > 0)
+        {
+            $this->response([
+                'status' => true,
+                'message' => 'data sudah masuk',
+                'data' => $data
+            ], REST_Controller::HTTP_CREATED);
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'data gagal masuk',
+                'data' => $data
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+       
+    } else 
+    {
+        //proses client web
+        $arr = json_decode(file_get_contents("php://input")); 
        
         if (empty($arr->id_suplier) OR empty($arr->nama_suplier)){
             echo "Submit gagal! Kolom barang / stok tidak boleh kosong.";
@@ -57,4 +84,59 @@ class Obat extends REST_Controller {
         
     }
 
+}
+
+    public function index_delete()
+    {
+        $arr = json_decode(file_get_contents("php://input"));
+        if ($arr == NULL)
+        {
+            $id = $this->delete('id_suplier');
+            if ($id === null)
+            {
+                $this->response([
+                    'status' => true,
+                    'message' => 'id tidak ada'
+                ], REST_Controller::HTTP_OK);
+
+            } else 
+            {
+                if ($this->model->delSuplier($id) > 0)
+                {
+                    $this->response([
+                        'status' => true,
+                        'message' => 'berhasil di hapus'
+                    ], REST_Controller::HTTP_OK);
+
+                }
+                else 
+                {
+                    $this->response([
+                        'status' => true,
+                        'message' => 'gagal di hapus'
+                    ], REST_Controller::HTTP_OK);
+
+                }
+          
+            }
+            
+        }
+        else 
+        {
+
+        $this->model->delSuplier($arr);
+        $this->response([
+            'status' => true,
+            'message' => 'data berhasil di hapus'
+        ], REST_Controller::HTTP_OK);
+
+        }
+    }
+    public function index_put()
+    {
+        $arr = json_decode(file_get_contents("php://input"));
+        var_dump($arr);
+        die;
+
+    }
 }
