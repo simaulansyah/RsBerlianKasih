@@ -119,14 +119,18 @@ class Obat extends CI_Controller {
         }else
         {
             $data = [
+
+                'oldid' => $this->input->post('oldid'),
                 'id_suplier' => $this->input->post('id_suplier'),
                 'nama_suplier' => $this->input->post('nama_suplier'),
                 'alamat_suplier' => $this->input->post('alamat_suplier'),
                 'telepon_suplier' => $this->input->post('telepon_suplier')
             ];
+            
+
             $send = $this->fcurl->urlPut(base_url('/api/Apotek/Obat'), json_encode($data));
             $this->session->set_flashdata('message', json_encode(array('respon'=>$send),JSON_UNESCAPED_SLASHES));
-            
+            redirect('Apotek/Obat/Suplier');
             
         }
 

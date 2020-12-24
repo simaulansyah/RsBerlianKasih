@@ -1,0 +1,4 @@
+[2020-12-18 23:27:34.825] [sharedprocess] [info] main {"machineId":"bd2fadbda2df69bc06a6440c19509440f557a16db5a27971927c8ae629c40283","windowId":2}
+[2020-12-18 23:27:34.912] [sharedprocess] [error] [File Watcher (node.js)] Error: ENOENT: no such file or directory, stat '/opt/lampp/htdocs/RsBerlianKasih/backupDb/opt/lampp/htdocs/RsBerlianKasih/backupDb/~/.vscode-root/User/snippets'
+[2020-12-18 23:27:35.063] [sharedprocess] [info] Deleted from disk ms-vscode-remote.remote-ssh-edit-nightly /home/hasbi/.vscode/extensions/ms-vscode-remote.remote-ssh-edit-nightly-2020.12.11157
+[2020-12-18 23:28:14.864] [sharedprocess] [info] Starting to clean up unused language packs.

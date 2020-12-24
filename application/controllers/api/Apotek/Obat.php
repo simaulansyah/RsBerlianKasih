@@ -30,7 +30,7 @@ class Obat extends REST_Controller {
         $data = $this->model->getSuplier();
         //get parameter
         $id = $this->get('id');
-        if ($id === null)
+        if ($id == null)
         {
             // Set the response and exit
             $this->response([
@@ -39,7 +39,6 @@ class Obat extends REST_Controller {
             ], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
             
         }
-
     }
 
     public function index_post()
@@ -134,9 +133,71 @@ class Obat extends REST_Controller {
     }
     public function index_put()
     {
-        $arr = json_decode(file_get_contents("php://input"));
-        var_dump($arr);
-        die;
+         $arr = json_decode(file_get_contents("php://input"),true);
+         if ($arr == NULL){
+            $id = $this->uri->segment('5');
+       
+            if ($id === null)
+            {
+            $this->response([
+                'status' => true,
+                'message' => 'data tidak berhasil'
+            ], REST_Controller::HTTP_OK);
+    
+            }else{
+            
+              $data = array(
+                $this->put('id_suplier'),
+                $this->put('nama_suplier'),
+                $this->put('alamat_suplier'),
+                $this->put('telepon_suplier')   
+              );
+    
+              if($this->model->update_suplier($data, $id) > 0) 
+              {
+
+              $this->response([
+                'status' => true,
+                'message' => 'data berhasil di update'
+            ], REST_Controller::HTTP_OK);
+
+              }else 
+              {
+                $this->response([
+                    'status' => false,
+                    'message' => 'gagal bung'
+                ], REST_Controller::HTTP_BAD_REQUEST);
+
+              }
+            
+            }
+
+         }
+         else{
+            $oldid = $arr['oldid'];
+            $data = [
+
+              
+                'id_suplier' => $arr['id_suplier'],
+                'nama_suplier' => $arr['nama_suplier'],
+                'alamat_suplier' => $arr['alamat_suplier'],
+                'telepon_suplier' => $arr['telepon_suplier']
+            ];
+            if($this->model->update_suplier($data, $oldid) > 0)
+            {
+
+            echo "data suplier berhasil! di edit";
+
+            }
+            else {
+                echo "data gagal di edit";
+
+            }
+            
+         }
+      
+
+    
 
     }
 }

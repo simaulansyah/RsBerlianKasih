@@ -54,11 +54,10 @@ class Fcurl{
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);      
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         $result = curl_exec($ch);
-        
        // $result = json_decode($result);
         curl_close($ch);
        

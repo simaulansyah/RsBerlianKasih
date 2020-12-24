@@ -21,4 +21,10 @@ class Apotek_model extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function update_suplier($data, $oldid)
+    {
+        $this->db->update('suplier_obat', $data, array('id_suplier' => $oldid)); 
+        return $this->db->affected_rows();
+    }
+
 }

@@ -1,0 +1,46 @@
+Looking for git in: git
+Using git 2.17.1 from git
+> git rev-parse --git-dir
+Open repository: /opt/lampp/htdocs/RsRest
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse main
+> git rev-parse --symbolic-full-name main@{u}
+> git rev-list --left-right main...refs/remotes/origin/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname)
+> git remote --verbose
+Warning: Failed to watch ref '/opt/lampp/htdocs/RsRest/.git/refs/remotes/origin/main', is most likely packed.
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :application/config/config.php
+> git ls-files --stage -- /opt/lampp/htdocs/RsRest/application/config/config.php
+> git cat-file -s f92d11f5db7e8dee378315cf953c7f7b8d31f234
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git ls-files --stage -- /opt/lampp/htdocs/RsRest/application/config/config.php
+> git rev-parse main
+> git cat-file -s f92d11f5db7e8dee378315cf953c7f7b8d31f234
+> git rev-parse --symbolic-full-name main@{u}
+> git rev-list --left-right main...refs/remotes/origin/main
+> git show --textconv :application/config/config.php
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname)
+> git remote --verbose
+Warning: Failed to watch ref '/opt/lampp/htdocs/RsRest/.git/refs/remotes/origin/main', is most likely packed.
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse main
+> git rev-parse --symbolic-full-name main@{u}
+> git rev-list --left-right main...refs/remotes/origin/main
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname)
+> git remote --verbose
+Warning: Failed to watch ref '/opt/lampp/htdocs/RsRest/.git/refs/remotes/origin/main', is most likely packed.
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
