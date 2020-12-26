@@ -22,7 +22,7 @@ class Auth extends CI_Controller {
             $data['role'] = $this->Auth_model->getrole();
             $this->load->view('templates/auth_header');
             $this->load->view('templates/auth_footer');
-            $this->load->view('login', $data);
+            $this->load->view('Auth/login', $data);
         } else
         {
             $this->_login();
@@ -90,5 +90,51 @@ class Auth extends CI_Controller {
         unset($_SESSION['user_id']);
         //$this->session->unset_userdata(array('user_name' => ''));
         redirect('auth');
+    }
+
+    public function Regis()
+    {
+        	// set rules
+		$this->form_validation->set_rules('username','Username','required|trim');
+		$this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[user.email]', [
+			// custom message
+			'is_unique' => 'Email is already exists!'
+		]);
+		$this->form_validation->set_rules('password','Password','required|trim|min_length[3]|matches[password2]', [
+			// custom message
+			'matches' => 'Password didn\'t match!',
+			'min_length' => 'Password is too short!' 
+		]);
+        $this->form_validation->set_rules('password2','confirmation password','matches[password]');
+        $this->form_validation->set_rules('role','Jabatan','required');
+            if ($this->form_validation->run() == false )
+            {
+                $data['role'] = $this->Auth_model->getrole();
+                $this->load->view('templates/auth_header');
+                $this->load->view('templates/auth_footer');
+                $this->load->view('Auth/regis', $data);        
+            }
+            else {
+                 
+        $data = [
+            'nama_user' => $this->input->post('username', TRUE),
+            'email' => $this->input->post('email', TRUE),
+            'image' => 'default.jpg',
+            'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
+            'role_id' => $this->input->post('role', TRUE),
+            'is_active' => 0,
+            'date_created' => time()
+        ];
+
+        $role = $this->input->post('role', TRUE);
+            $this->Auth_model->setUser($data, $role);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> buka email anda dan verifikasi untuk login </div>');
+            redirect('Auth/Regis');
+
+            }
+
+     
+        
+    
     }
 }
