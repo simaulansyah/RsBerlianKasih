@@ -28,6 +28,10 @@
 			<button>
 				<span>Login</span>
 			</button>
+			<br>
+            <div class="text-center">
+                <a class="small" href="<?= base_url('auth/regis'); ?>">Belum Punya Akun? Daftar!</a>
+              </div>
 		</form>
 		<img src="<?= base_url('vendor/img/image-2.png') ?>" alt="" class="image-2">
 	</div>

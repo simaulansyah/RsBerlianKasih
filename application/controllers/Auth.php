@@ -137,4 +137,14 @@ class Auth extends CI_Controller {
         
     
     }
+
+    public function verify()
+	{
+        $this->Auth_model->run_verify();
+        var_dump($this->Auth_model->run_verify());
+        die;
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> buka email anda dan verifikasi untuk login </div>');
+            redirect('Auth/Regis');
+        
+	}
 }
