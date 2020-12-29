@@ -78,7 +78,6 @@ class Bed extends CI_Controller {
                     'tarif' => $tarif,
                     'status' => $status
                 );
-               
                 $this->model->setBed($data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Add data Kasur </div>');
                 redirect("Ruangan/Bed");

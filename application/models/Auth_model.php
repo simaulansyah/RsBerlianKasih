@@ -21,27 +21,17 @@ class Auth_model extends CI_Model
 
     }
 
-    public function setUser($data, $roleid)
+    public function setUser($data)
     {
 
-
-		// $this->db->select('role');
-		// $this->db->from('user_role');
-		// $this->db->where("role_id", $roleid);
-		// $role=$this->db->get();
-
-		$sql = "SELECT `role` FROM `user_role` WHERE `role_id` = ?" ;
-		$query = $this->db->query($sql, array($roleid))->result();
-		$conv = json_decode(json_encode($query), true);
-		$role = $conv[0]["role"];
+		//send email
 		$this->db->insert('user', $data);
-		
-        //send email
-        $this->_sendEmail('verify', 'Email verification', $role);
+		$this->_sendEmail('verify', 'Email verification');
+	
 		//message('Congratulations! your account has been created. Please activate your account before 24 hours!', 'success', 'auth');
     }
 
-    private function _sendEmail($type, $subject, $role)
+    private function _sendEmail($type, $subject)
 	{
 		// prepare the token
 		$token = base64_encode(random_bytes(32));
@@ -70,7 +60,7 @@ class Auth_model extends CI_Model
 		$this->email->to($email);
 		
 		$this->email->subject($subject);
-		$this->email->message($this->_templateEmail($user_token, $type, $role));
+		$this->email->message($this->_templateEmail($user_token, $type));
 
 		if ($this->email->send()) {
 			return true;
@@ -81,7 +71,7 @@ class Auth_model extends CI_Model
     }
     
     	// untuk template email 
-	private function _templateEmail($user_token, $type, $role)
+	private function _templateEmail($user_token, $type)
 	{
 		if ($type == 'verify'){
 			return '
@@ -95,7 +85,6 @@ class Auth_model extends CI_Model
 				</head>
 				<body>
 				Selamat Anda Berhasil Mendaftar akun di SIM RS Berlian Kasih <br>
-                Anda Mendaftar Sebagai  =  '.$role.' <br>
 					Untuk Aktivasi Akun Klik Link Berikut : <a href="' . base_url() . 'auth/verify?email=' . $user_token['email'] . '&token=' . urlencode($user_token['token']) . '">Activate</a>
 				</body>
 				</html>
@@ -126,7 +115,7 @@ class Auth_model extends CI_Model
 		$email = $this->input->get('email');
 
 		$user_token = $this->db->get_where('user_token', ['email' => $email])->row_array();
-		
+		var_dump($user_token);
 
 		// cek apakah email yg dikirim ada di database
 		if ($user_token) {
@@ -149,9 +138,13 @@ class Auth_model extends CI_Model
 					$this->db->set('is_active', 1);
 					$this->db->where('email', $email);
 					$this->db->update('user');
-					
+
+
 					$this->db->delete('user_token', ['email' => $email]);
-					return 0;
+					$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Selamat Akun Anda Telah Aktif Silahkan login </div>');
+					redirect('Auth');
+					
+					
 					//message( $email . ' has been activated! please login.', 'success', 'auth');
 				}
 			}else{
@@ -162,6 +155,28 @@ class Auth_model extends CI_Model
 			return "invalid email";
 			//message('Account activation failed! email is invalid!', 'danger', 'auth');
 		}
+	}
+
+	public function getPegawai($id)	
+	{
+		
+		
+		$sql = "SELECT * FROM `pegawai` WHERE `nip` = ?" ;
+		$query = $this->db->query($sql, array($id))->result();
+		if (!$query){
+			return array();
+		} else
+		{
+			
+			$conv = json_decode(json_encode($query), true);
+			$datapegawai = $conv[0];
+			return $datapegawai;
+		}
+	
+		// var_dump($datapegawai["nama_pegawai"]);
+		// die;
+		// $this->db->insert('user', $data);
+
 	}
 
 }

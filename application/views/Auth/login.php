@@ -4,7 +4,8 @@
         <img src="<?= base_url('vendor/img/hospital.png') ?>" alt="" class="image-1">
 
 		<form action="<?= base_url('Auth') ?>" method="post">
-			<h3>Login Access</h3>	
+			<h3>Login Access</h3>
+			<h4><?= $this->session->flashdata('message'); ?></h4> 
 			<div class="form-holder">
 				<span class="lnr lnr-envelope"></span>
 				<input type="text" name="username" id="username" class="form-control" placeholder="UserName">

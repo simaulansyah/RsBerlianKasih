@@ -95,7 +95,10 @@ class Auth extends CI_Controller {
     public function Regis()
     {
         	// set rules
-		$this->form_validation->set_rules('username','Username','required|trim');
+		$this->form_validation->set_rules('nip','Nip','required|trim|is_unique[user.id_user]', [
+			// custom message
+			'is_unique' => 'nip is already exists!'
+		]);
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[user.email]', [
 			// custom message
 			'is_unique' => 'Email is already exists!'
@@ -106,45 +109,65 @@ class Auth extends CI_Controller {
 			'min_length' => 'Password is too short!' 
 		]);
         $this->form_validation->set_rules('password2','confirmation password','matches[password]');
-        $this->form_validation->set_rules('role','Jabatan','required');
             if ($this->form_validation->run() == false )
             {
                 $data['role'] = $this->Auth_model->getrole();
                 $this->load->view('templates/auth_header');
                 $this->load->view('templates/auth_footer');
-                $this->load->view('Auth/regis', $data);        
+                $this->load->view('Auth/regis', $data); 
             }
             else {
-                 
-        $data = [
-            'nama_user' => $this->input->post('username', TRUE),
-            'email' => $this->input->post('email', TRUE),
-            'image' => 'default.jpg',
-            'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
-            'role_id' => $this->input->post('role', TRUE),
-            'is_active' => 0,
-            'date_created' => time()
-        ];
 
-        $role = $this->input->post('role', TRUE);
-            $this->Auth_model->setUser($data, $role);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> buka email anda dan verifikasi untuk login </div>');
-            redirect('Auth/Regis');
+               $iduser = $this->input->post('nip');
+               $get = $this->Auth_model->getPegawai($iduser);
+               if (!$get)
+               {
+                echo '<script>alert("nip tidak ada.");window.location.href="' . base_url('auth/regis') . '";</script>';
+               } else 
+               {
+                $data = [
+                    'id_user' => $this->input->post('nip', TRUE),
+                    'nama_user' => $get["nama_pegawai"],
+                    'email' => $this->input->post('email', TRUE),
+                    'image' => 'default.jpg',
+                    'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
+                    'role_id' => $get["id_jabatan"],
+                    'is_active' => 0,
+                    'date_created' => time()
+                ];
+                $this->Auth_model->setUser($data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> buka email anda dan verifikasi untuk login </div>');
+            
+                redirect('Auth/Regis');   
+            }
+               echo '<script>alert("nip tidak ada.");window.location.href="' . base_url('auth/regis') . '";</script>';
+
 
             }
-
-     
-        
     
     }
 
     public function verify()
 	{
-        $this->Auth_model->run_verify();
-        var_dump($this->Auth_model->run_verify());
-        die;
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> buka email anda dan verifikasi untuk login </div>');
-            redirect('Auth/Regis');
+       if($this->Auth_model->run_verify() == 0);{
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Selamat Akun Anda Telah Aktif Silahkan login </div>');
+        redirect('Auth');
+       } if ($this->Auth_model->run_verify() == "invalid token")
+       {
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> invalid token</div>');
+        redirect('Auth');
+
+       } if ($this->Auth_model->run_verify() == "expired")
+       {
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">expired</div>');
+        redirect('Auth');
+       } else 
+       {
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">invalid email</div>');
+        redirect('Auth');
+       }
+       
+       
         
 	}
 }

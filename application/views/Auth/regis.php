@@ -5,11 +5,11 @@
 
 		<form action="<?= base_url('Auth/Regis') ?>" method="post">
 			<h3>Form Pendaftaran </h3>	
-            <h5><?= $this->session->flashdata('message'); ?></h5> 
+            <h4><?= $this->session->flashdata('message'); ?></h4> 
 			<div class="form-holder">
 				<span class="lnr lnr-user"></span>
-				<input type="text" name="username" id="username" class="form-control" placeholder="UserName" value="<?= set_value('username'); ?>" >
-				<?= form_error('username', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+				<input type="text" name="nip" id="nip" class="form-control" placeholder="Nip" value="<?= set_value('nip'); ?>" >
+				<?= form_error('nip', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 			</div>
             <div class="form-holder">
             <span class="lnr lnr-envelope"></span>
@@ -26,17 +26,6 @@
             <span class="lnr lnr-checkmark-circle"></span>
 				<input type="password" name="password2" class="form-control" placeholder="Verify Password">
 				<?= form_error('password', '<small class="alert alert-danger" role="alert">', '</small>'); ?>
-			</div>
-			<div class="form-holder">
-                <span class="lnr lnr-users"></span>
-                <select  name="role" id="role" class="form-control" >
-        <option selected="selected" value="">Select One...</option>
-        <?php foreach($role as $r) :?>
-        <option value="<?= $r['role_id']; ?>"> <?=$r['role'] ?></option>
-        <?php endforeach; ?>
-       
-      </select>
-      <?= form_error('role','<small class="text-danger pl-2 pt-1">','</small>'); ?>
 			</div>
 			<button>
 				<span>Daftar</span>
