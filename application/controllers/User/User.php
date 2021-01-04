@@ -21,26 +21,22 @@ class User extends CI_Controller {
     public function index()
     {
 
-        if ($this->session->userdata['role_id'] != 1)
-        {
-            redirect("auth");
-        } else
+        if ($this->session->userdata['role_id'] == "Rs01s" || $this->session->userdata['role_id'] == "SUs" )
         {
 
             $data['title'] = "Data Pengguna ";
             $data['User'] = $this->model->getUser();
             $data['queryUser'] = $this->model->getJoinRole();
 
-
-       
-
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("User/index", $data);
             $this->load->view("templates/dashboard_footer");
-            
-
+       
+        } else
+        {
+            redirect("auth");
         }
 
     }

@@ -20,4 +20,11 @@ class User_model extends CI_Model
      
     }
 
+    public function getNamaUser($id)
+    {
+        $this->db->where('id_user', $id); 
+        $this->db->from('user');
+        return $this->db->get()->result_array();  
+    }
+
 }

@@ -21,7 +21,7 @@
                 <select  name="role" id="role" class="form-control" >
         <option selected="selected" value="">Select One...</option>
         <?php foreach($role as $r) :?>
-        <option value="<?= $r['role_id']; ?>"> <?=$r['role'] ?></option>
+        <option value="<?= $r['id_jabatan']; ?>"> <?=$r['nama_jabatan'] ?></option>
         <?php endforeach; ?>
       </select>
 			

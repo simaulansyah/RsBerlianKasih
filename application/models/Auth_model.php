@@ -5,9 +5,10 @@ class Auth_model extends CI_Model
 {
     public function getrole()
     {
-        $query = $this->db->query('SELECT * FROM user_role');
-        $result = $query->result_array();
-        return $result;
+	 
+		 $this->db->like('id_jabatan', 's', 'before'); // query id jabatan dengan akhiran s
+		 $this->db->from('jabatan');
+		 return $this->db->get()->result_array();     
     }
 
     public function getuserlogin($email)

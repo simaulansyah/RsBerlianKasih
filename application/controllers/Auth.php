@@ -44,10 +44,10 @@ class Auth extends CI_Controller {
         echo '<script>alert("email yang Anda masukan salah.");window.location.href="' . base_url('auth') . '";</script>';
        } else
        {
-           var_dump($pass, $cek_login->password );
-           die;
+           
            //jika ada, lalu cek password
-           if (password_verify($pass, $cek_login->password))
+           
+           if (password_verify($pass, $cek_login->password) == false)
           // if($pass != $cek_login->password)
            {
                //jika password salah
@@ -57,8 +57,10 @@ class Auth extends CI_Controller {
                 //jika password betul cek jabatan
                if ($role != $cek_login->role_id)
                {
+                //var_dump($role , $cek_login->role_id);
+                //die;
                 echo '<script>alert("Jabatan yang Anda masukan Tidak Sesuai.");window.location.href="' . base_url('auth') . '";</script>';
-                
+               die;
                }
                if ($cek_login->is_active == 0)
                {
@@ -72,14 +74,14 @@ class Auth extends CI_Controller {
                 );
                 $this->session->set_userdata($session_data);
 
-                if ($this->session->userdata['role_id'] == 1) {
+                if ($this->session->userdata['role_id'] == "SUs") {
                     redirect('admin');
                 }
                 if ($this->session->userdata['role_id'] == 2) {
-                    redirect('perawat');
-                }
-                if ($this->session->userdata['role_id'] == "Rs6") {
                     redirect('welcome');
+                }
+                if ($this->session->userdata['role_id'] == "Rs01s") {
+                    redirect('admin');
                 } else {
                     redirect('welcome');
                 }
@@ -103,7 +105,7 @@ class Auth extends CI_Controller {
     public function Regis()
     {
         	// set rules
-		$this->form_validation->set_rules('nip','Nip','required|trim|is_unique[user.id_user]', [
+		$this->form_validation->set_rules('nip','Nip','required|trim|is_unique[user.nip]', [
 			// custom message
 			'is_unique' => 'nip is already exists!'
 		]);
@@ -133,12 +135,13 @@ class Auth extends CI_Controller {
                 echo '<script>alert("nip tidak ada.");window.location.href="' . base_url('auth/regis') . '";</script>';
                } else 
                {
+                $password = $this->input->post("password", true);
                 $data = [
-                    'id_user' => $this->input->post('nip', TRUE),
+                    'nip' => $this->input->post('nip'),
                     'nama_user' => $get["nama_pegawai"],
                     'email' => $this->input->post('email', TRUE),
                     'image' => 'default.jpg',
-                    'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
+                    'password' => password_hash($password, PASSWORD_BCRYPT),
                     'role_id' => $get["id_jabatan"],
                     'is_active' => 0,
                     'date_created' => time()

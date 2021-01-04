@@ -7,6 +7,7 @@ class Pegawai extends CI_Controller {
         parent::__construct();
         //load model admin
         $this->load->model('Pegawai_model', 'pegawai');
+        $this->load->model('User_model', 'modelUser');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
         $this->load->helper('file');    
@@ -19,18 +20,14 @@ class Pegawai extends CI_Controller {
     }
     public function index()
     {
-        if ($this->session->userdata['role_id'] != 1)
+        if ($this->session->userdata['role_id'] == "Rs01s" || $this->session->userdata['role_id'] == "SUs" )
         {
-            redirect("auth");
-        } else
-        {
-
-
             $data['jk'] = $this->pegawai->getGender();
             $data['stat'] = $this->pegawai->getStat();
             $data['pegawai'] = $this->pegawai->getpegawai();
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
 
 
             $data['title'] = "Data Pegawai";
@@ -39,6 +36,12 @@ class Pegawai extends CI_Controller {
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("pegawai/index", $data);
             $this->load->view("templates/dashboard_footer");
+
+    
+        } else
+        {
+
+            redirect("auth");
             
         }
        
