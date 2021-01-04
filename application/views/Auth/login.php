@@ -8,8 +8,8 @@
 			<h4><?= $this->session->flashdata('message'); ?></h4> 
 			<div class="form-holder">
 				<span class="lnr lnr-envelope"></span>
-				<input type="text" name="username" id="username" class="form-control" placeholder="UserName">
-				<?= form_error('username', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+				<input type="text" name="email" id="email" class="form-control" placeholder="Email">
+				<?= form_error('email', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 			</div>
 			<div class="form-holder">
 				<span class="lnr lnr-lock"></span>

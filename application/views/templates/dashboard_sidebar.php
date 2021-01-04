@@ -102,16 +102,26 @@
         </div>
       </li>
 
+      <hr class="sidebar-divider">
 
+<div class="sidebar-heading">
+  Data Akun
+</div>
 
-
-
-
-
-   
-    
-    
-    
+<li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>User Akun</span>
+        </a>
+        <div id="user" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= base_url('User/User') ?>">Data User</a>
+            <a class="collapse-item" href="<?= base_url('Asset/Asset/Kategori') ?>">User Role</a>
+            <a class="collapse-item" href="<?= base_url('Asset/Asset/Lokasi') ?>">User Token</a>
+          </div>
+        </div>
+      </li>
    
    
     <div class="version" id="version-ruangadmin"></div>

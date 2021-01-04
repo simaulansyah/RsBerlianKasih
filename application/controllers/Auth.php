@@ -14,8 +14,8 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{ 
-        $this->form_validation->set_rules('username', 'username', 'required|trim');
-        $this->form_validation->set_rules('password', 'username', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -30,21 +30,25 @@ class Auth extends CI_Controller {
     }
     private function _login()
     {
-        $user = $this->input->post('username');
-        $pass = md5($this->input->post('password'));
+        $email = $this->input->post('email');
+        $pass = $this->input->post('password');
         $role = $this->input->post('role');
 
-        // CEK KE DATABASE BERDASARKAN username
-        $cek_login =  $this->Auth_model->getuserlogin($user);
+
+        // CEK KE DATABASE BERDASARKAN email
+        $cek_login =  $this->Auth_model->getuserlogin($email);
 
        if ($cek_login == NULL)
        {
            //jika tidak ada
-        echo '<script>alert("Username yang Anda masukan salah.");window.location.href="' . base_url('auth') . '";</script>';
+        echo '<script>alert("email yang Anda masukan salah.");window.location.href="' . base_url('auth') . '";</script>';
        } else
        {
+           var_dump($pass, $cek_login->password );
+           die;
            //jika ada, lalu cek password
-           if($pass != $cek_login->password)
+           if (password_verify($pass, $cek_login->password))
+          // if($pass != $cek_login->password)
            {
                //jika password salah
                echo '<script>alert("Password yang Anda masukan salah.");window.location.href="' . base_url('auth') . '";</script>';
@@ -56,7 +60,11 @@ class Auth extends CI_Controller {
                 echo '<script>alert("Jabatan yang Anda masukan Tidak Sesuai.");window.location.href="' . base_url('auth') . '";</script>';
                 
                }
-               else
+               if ($cek_login->is_active == 0)
+               {
+                echo '<script>alert("Akun anda Belum Aktif.");window.location.href="' . base_url('auth') . '";</script>';
+               }
+            else
                {
                 $session_data = array(
                     'user_id'   => $cek_login->id_user,
@@ -70,8 +78,8 @@ class Auth extends CI_Controller {
                 if ($this->session->userdata['role_id'] == 2) {
                     redirect('perawat');
                 }
-                if ($this->session->userdata['role_id'] == 3) {
-                    redirect('apotek');
+                if ($this->session->userdata['role_id'] == "Rs6") {
+                    redirect('welcome');
                 } else {
                     redirect('welcome');
                 }

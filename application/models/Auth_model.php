@@ -10,9 +10,9 @@ class Auth_model extends CI_Model
         return $result;
     }
 
-    public function getuserlogin($user)
+    public function getuserlogin($email)
     {
-        $hasil = $this->db->where('nama_user', $user)->limit(1)->get('user');
+        $hasil = $this->db->where('email', $email)->limit(1)->get('user');
         if ($hasil->num_rows() > 0) {
             return $hasil->row();
         } else {
