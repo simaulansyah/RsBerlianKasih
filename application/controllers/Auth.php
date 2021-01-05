@@ -77,8 +77,8 @@ class Auth extends CI_Controller {
                 if ($this->session->userdata['role_id'] == "SUs") {
                     redirect('admin');
                 }
-                if ($this->session->userdata['role_id'] == 2) {
-                    redirect('welcome');
+                if ($this->session->userdata['role_id'] == "Rs03s") {
+                    redirect('Perawat/Perawat');
                 }
                 if ($this->session->userdata['role_id'] == "Rs01s") {
                     redirect('admin');
@@ -106,7 +106,7 @@ class Auth extends CI_Controller {
     {
         	// set rules
 		$this->form_validation->set_rules('nip','Nip','required|trim|is_unique[user.nip]', [
-			// custom message
+			// custom message0
 			'is_unique' => 'nip is already exists!'
 		]);
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[user.email]', [
