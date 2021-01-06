@@ -61,4 +61,42 @@ class User_model extends CI_Model
         return $result;
     }
 
+    public function setUserAccess($data)
+    {
+        $this->db->insert('user_access_menu', $data);
+    }
+    public function delAcces($id)
+    {
+        $this->db->delete('user_access_menu', array('id_access' => $id));
+    }
+
+    public function editAccess($id, $data)
+    {
+        $this->db->update('user_access_menu', $data, array('id_access' => $id));
+    }
+    public function getSubmenu()
+    {
+        $this->db->select('*')
+                 ->from('user_sub_menu')//jabatan adalah anak & pegawai adalah tabel utama 
+                 ->join('user_menu', 'user_menu.id_menu = user_sub_menu.menu_id');
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+
+    }
+
+    public function setSubmenu($data)
+    {
+        $this->db->insert('user_sub_menu', $data);
+    }
+    public function delSub($data)
+    {
+        $this->db->delete('user_sub_menu', array('id_sub' => $data));
+    }
+    public function editSub($id, $data)
+    {
+        $this->db->update('user_sub_menu', $data, array('id_sub' => $id));
+    }
+
 }

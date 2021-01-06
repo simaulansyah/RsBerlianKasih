@@ -8,35 +8,39 @@
         </div>
 
         <div class="d-sm-flex align-items-center justify-content-between mb-3" >
-        <a href="" data-toggle="modal" data-target="#tbhAccess" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data Acces</a>
+        <a href="" data-toggle="modal" data-target="#tbhSub" class="badge badge-info"> <i class='fas fa-plus-circle'></i>Tambah Data SubMenu</a>
         </div>
 
-        <?= form_error('role', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
+        <?= form_error('title', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <?= form_error('menu', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
-
+        <?= form_error('url', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
 
         <h5><?= $this->session->flashdata('message'); ?></h5> 
-
         <table class="table table-striped" id="asset">
             <thead>
                 <td>#</td>
-                <td>ID User Acces</td>
-                <td>Role ID</td>
-                <td>Menu ID</td>
+                <td>ID Sub</td>
+                <td>Menu</td>
+                <td>Title</td>
+                <td>URL</td>
+                <td>ICON</td>
+                <td>is Active</td>
                 <td>Opsi</td>
             </thead>
             <tbody>
                 <?php $i = 1;?>
-              
-            <?php foreach($userAccess as $u ) :?>
+            <?php foreach($querysubMenu as $s ) :?>
                 <tr>
                 <td><?=$i?></td>   
-                <td><?= $u['id_access']; ?></td> 
-                <td><?= $u['role']; ?></td>
-                <td><?= $u['menu']; ?></td>
+                <td><?= $s['id_sub']; ?></td> 
+                <td><?= $s['menu']; ?></td>
+                <td><?= $s['title']; ?></td>
+                <td><?= $s['url']; ?></td>
+                <td><?= $s['icon']; ?></td>
+                <td><?= $s['is_active']; ?></td>
                 <td>
-                <a href="" data-toggle="modal" data-target="#edtAccess<?= $u['id_access']; ?>"  class="badge badge-primary">edit</a>
-                <a href="<?php echo site_url("Menu/UserAcces/delAccess/" . $u['id_access']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
+                <a href="" data-toggle="modal" data-target="#edtSub<?= $s['id_sub']; ?>"  class="badge badge-primary">edit</a>
+                <a href="<?php echo site_url("Menu/Submenu/delSub/" . $s['id_sub']);?>" class="badge badge-danger" onclick="return confirm('Delete content?');">hapus</a>
                 </td>
                 </tr>
                 <?php $i++?>
@@ -45,45 +49,50 @@
           </table>
 
 
-
 <!-- modal tambah -->
 
-<div class="modal fade" id="tbhAccess" tabindex="-1" role="dialog" aria-labelledby="tbhAccessLabel" aria-hidden="true">
+<div class="modal fade" id="tbhSub" tabindex="-1" role="dialog" aria-labelledby="tbhSubLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tbhAccessLabel">Tambah Data Menu </h5>
+        <h5 class="modal-title" id="tbhSubLabel">Tambah SubMenu </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <Form action="<?= base_url('Menu/UserAcces/tambahAccess'); ?>" method="POST">
+     <Form action="<?= base_url('Menu/Submenu/tambahSubmenu'); ?>" method="POST">
       <div class="modal-body">
 
       <table class="table" >
         <tr>
-            <td>Role:</td>
+            <td>Menu :</td>
             <td>
-              <select  name="role" id="role" class="form-control" >
-              <option selected="selected" value="">Select One...</option>
-                    <?php foreach($role as $r) :?>
-                    <option value="<?= $r['id_jabatan']; ?>"> <?=$r['nama_jabatan'] ?></option>
-                    <?php endforeach; ?>
-              </select>
-            </td>
-        </tr>
-        <tr>
-            <td> Menu :</td>
-            <td>
-
-            <select  name="menu" id="menu" class="form-control" >
+              <select  name="menu" id="menu" class="form-control" >
               <option selected="selected" value="">Select One...</option>
                     <?php foreach($menu as $m) :?>
                     <option value="<?= $m['id_menu']; ?>"> <?=$m['menu'] ?></option>
                     <?php endforeach; ?>
               </select>
-
-
+            </td>
+        </tr>
+        <tr>
+            <td> Title :</td>
+            <td><input type="text" name="title" id="title" class="form-control"></td>
+        </tr>
+        <tr>
+            <td> URL :</td>
+            <td><input type="text" name="url" id="url" class="form-control"></td>
+        </tr>
+        <tr>
+            <td> Icon :</td>
+            <td><input type="text" name="icon" id="icon" class="form-control"></td>
+        </tr>
+        <tr>
+            <td> Is Active :</td>
+            <td>
+            <input type="hidden" name="check[0]" value="0" />
+            <input type="checkbox" id="Active" name="check[0]" value="1"/>
+            <label for="Active">Active</label><br>
             </td>
         </tr>
       </table>
@@ -99,45 +108,57 @@
 </div>
 
 
+
+
 <!-- edit Menu -->
 <?php $i = 1;?>
-<?php foreach($userAccess as $u ) :?>
-<div class="modal fade" id="edtAccess<?= $u['id_access']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtAccessLabel" aria-hidden="true">
+<?php foreach($querysubMenu as $s ) :?>
+<div class="modal fade" id="edtSub<?= $s['id_sub']; ?>" tabindex="-1" role="dialog" aria-labelledby="edtSubLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="edtAccessLabel">Edit Data Menu </h5>
+        <h5 class="modal-title" id="edtSubLabel">Edit Sub Menu </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <Form action="<?= base_url('Menu/UserAcces/EditAccess'); ?>" method="POST">
+     <Form action="<?= base_url('Menu/Submenu/editSub'); ?>" method="POST">
       <div class="modal-body">
 
       <table class="table" >
-        <tr>
-            <td>Role :</td>
-            <td>
-            <select name="role" id="role" class="form-control">
-                                    <?php foreach ($role as $r) : ?> 
-                                    <!-- get selected option -->
-                                    <option <?php if($r['id_jabatan'] == $u['role_id'] ){ echo 'selected="selected"'; } ?> value="<?= $r['id_jabatan']; ?>"> <?= $r['nama_jabatan']; ?> </option> 
-                                    <?php endforeach; ?>
-                                </select>
-            </td>
-            <input type="hidden" name="id_access" value="<?= $u['id_access']; ?>">
-        </tr>
         <tr>
             <td>Menu :</td>
             <td>
             <select name="menu" id="menu" class="form-control">
                                     <?php foreach ($menu as $m) : ?> 
                                     <!-- get selected option -->
-                                    <option <?php if($m['id_menu'] == $u['menu_id'] ){ echo 'selected="selected"'; } ?> value="<?= $m['id_menu']; ?>"> <?= $m['menu']; ?> </option> 
+                                    <option <?php if($m['id_menu'] == $s['menu_id'] ){ echo 'selected="selected"'; } ?> value="<?= $m['id_menu']; ?>"> <?= $m['menu']; ?> </option> 
                                     <?php endforeach; ?>
                                 </select>
             </td>
-           
+            <input type="hidden" name="oldmenu"   value="<?= $s['menu_id']; ?>">
+            <input type="hidden" name="id_sub"   value="<?= $s['id_sub']; ?>">
+        </tr>
+        <tr>
+            <td>Title :</td>
+            <input type="hidden" name="oldtitle"   value="<?= $s['title']; ?>">
+            <td><input type="text" name="title" class="form-control" value="<?= $s['title']; ?>"></td>
+        </tr>
+        <tr>
+            <td>URL :</td>
+            <td><input type="text" name="url"  class="form-control" value="<?= $s['url']; ?>"></td>
+        </tr>
+        <tr>
+            <td>Icon :</td>
+            <td><input type="text" name="icon"  class="form-control" value="<?= $s['icon']; ?>"></td>
+        </tr>
+        <tr>
+            <td> Is Active :</td>
+            <td>
+            <input type="hidden" name="check[0]" value="0" />
+            <input type="checkbox" id="Active" name="check[0]" value="1" <?php if($s['is_active'] == "1" ){ echo "checked"; } ?> >
+            <label for="Active">Active</label><br>
+            </td>
         </tr>
       </table>
 
@@ -152,6 +173,10 @@
 </div>
 <?php $i++?>
 <?php endforeach; ?>
+
+
+
+
 
          <!-- Modal Logout -->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
