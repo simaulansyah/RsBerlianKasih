@@ -10,6 +10,8 @@ class Bed extends CI_Controller {
         $this->load->model('Ruangan_model', 'model');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
+        $this->load->model('User_model', 'modelUser');
+
 
         //sesion untuk mengamankan ketika di back tidak login lagi
         if (!$this->session->userdata('user_id')) {
@@ -20,23 +22,24 @@ class Bed extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata['role_id'] != 1)
-        {
-            redirect("auth");
-        } else
+        if ($this->session->userdata['role_id'] == "Rs3" || $this->session->userdata['role_id'] == "SU" )
         {
             $data ['total'] = $this->model->getRowKasur();
             $data['stat'] = $this->model->getStatus();
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
-
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("Ruangan/bed", $data);
             $this->load->view("templates/dashboard_footer");
-            
+           
+        } else
+        {
+           
+            redirect("auth");
         }
     }
     
@@ -54,6 +57,8 @@ class Bed extends CI_Controller {
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
 
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
@@ -121,6 +126,8 @@ class Bed extends CI_Controller {
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
 
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
@@ -150,15 +157,7 @@ class Bed extends CI_Controller {
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Kasur </div>');
             redirect("Ruangan/Bed");
 
-
-
-
         }
-
-
-              
-
-                
 
     }
 }

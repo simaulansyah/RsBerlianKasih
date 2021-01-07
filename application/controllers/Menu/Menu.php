@@ -18,7 +18,7 @@ class Menu extends CI_Controller {
     }
     public function index()
     {
-        if ($this->session->userdata['role_id'] == "SUs" )
+        if ($this->session->userdata['role_id'] == "SU" )
         {
             $data['title'] = "Menu";
             $data['menu'] = $this->modelUser->getMenu();

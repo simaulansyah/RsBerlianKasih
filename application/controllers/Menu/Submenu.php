@@ -20,9 +20,9 @@ class Submenu extends CI_Controller {
     public function index()
     {
 
-        if ($this->session->userdata['role_id'] == "SUs" )
+        if ($this->session->userdata['role_id'] == "SU")
         {
-            $data['title'] = "User Access Management";
+            $data['title'] = "SubMenu Management";
             $data['querysubMenu'] = $this->modelUser->getSubmenu();
             $data['menu'] = $this->modelUser->getMenu();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
@@ -61,7 +61,7 @@ class Submenu extends CI_Controller {
 
         if ($this->form_validation->run() == false)
         {
-            $data['title'] = "User Access Management";
+            $data['title'] = "SubMenu Management";
             $data['querysubMenu'] = $this->modelUser->getSubmenu();
             $data['menu'] = $this->modelUser->getMenu();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
@@ -140,7 +140,7 @@ class Submenu extends CI_Controller {
 
         if ($this->form_validation->run() == false)
         {
-            $data['title'] = "User Access Management";
+            $data['title'] = "SubMenu Management";
             $data['querysubMenu'] = $this->modelUser->getSubmenu();
             $data['menu'] = $this->modelUser->getMenu();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
@@ -168,12 +168,6 @@ class Submenu extends CI_Controller {
     }
 
     }
-
-
-
-
-
-
 
     public function check_user() {
         $menu = $this->input->post('menu');// get fiest name

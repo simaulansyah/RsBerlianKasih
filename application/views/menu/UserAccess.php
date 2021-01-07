@@ -32,7 +32,7 @@
                 <tr>
                 <td><?=$i?></td>   
                 <td><?= $u['id_access']; ?></td> 
-                <td><?= $u['role']; ?></td>
+                <td><?= $u['nama_jabatan']; ?></td>
                 <td><?= $u['menu']; ?></td>
                 <td>
                 <a href="" data-toggle="modal" data-target="#edtAccess<?= $u['id_access']; ?>"  class="badge badge-primary">edit</a>

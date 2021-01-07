@@ -25,7 +25,7 @@ class Admin extends CI_Controller {
     {
         // var_dump($this->session->userdata['role_id']);
         // die;
-        if ($this->session->userdata['role_id'] == "Rs01s" || $this->session->userdata['role_id'] == "SUs" )
+        if ($this->session->userdata['role_id'] == "Rs1" || $this->session->userdata['role_id'] == "SU" || $this->session->userdata['role_id'] == "Rs2" )
         {
             $data['title'] = "Admin";
             $data['totalKasur'] = $this->modelRuangan->getRowKasur();
@@ -41,8 +41,6 @@ class Admin extends CI_Controller {
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("admin/admin", $data);
             $this->load->view("templates/dashboard_footer");
-
-            
         } else
         {
             var_dump($this->session->userdata['role_id']);

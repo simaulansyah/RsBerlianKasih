@@ -12,6 +12,8 @@ class Obat extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->helper('file','date');    
         $this->load->library('Fcurl');
+        $this->load->model('User_model', 'modelUser');
+
         //sesion untuk mengamankan ketika di back tidak login lagi
         if (!$this->session->userdata('user_id')) {
 			redirect('auth');
@@ -27,6 +29,7 @@ class Obat extends CI_Controller {
     { 
         $data['suplier'] = $this->fcurl->urlGet(base_url('/api/Apotek/Obat'));
         $data['title'] = "Data Suplier";
+        $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
         $this->load->view("templates/dashboard_header");
         $this->load->view("templates/dashboard_sidebar", $data);
         $this->load->view("templates/dashboard_topbar", $data);
@@ -46,6 +49,8 @@ class Obat extends CI_Controller {
 
         $data['suplier'] = $this->fcurl->urlGet(base_url('/api/Apotek/Obat'));
         $data['title'] = "Data Suplier";
+        $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
         $this->load->view("templates/dashboard_header");
         $this->load->view("templates/dashboard_sidebar", $data);
         $this->load->view("templates/dashboard_topbar", $data);
@@ -110,6 +115,8 @@ class Obat extends CI_Controller {
         {
             $data['suplier'] = $this->fcurl->urlGet(base_url('/api/Apotek/Obat'));
             $data['title'] = "Data Suplier";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);

@@ -28,7 +28,7 @@
                 <td><?= $s['nip']; ?></td>
                 <td><?= $s['nama_user']; ?></td>
                 <td><?= $s['email']; ?></td>
-                <td><?= $s['role']; ?></td>
+                <td><?= $s['nama_jabatan']; ?></td>
                 <td><?= ($s['is_active'] == 1) ? "aktif" : "tidak aktif ";  ?></td>
                 <td><?= $s['date_created']; ?></td>
                 <td>

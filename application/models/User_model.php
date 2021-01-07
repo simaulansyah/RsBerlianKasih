@@ -11,8 +11,8 @@ class User_model extends CI_Model
     public function getJoinRole()
     {
         $this->db->select('*')
-                 ->from('user_role')//jabatan adalah anak & pegawai adalah tabel utama 
-                 ->join('user', 'user.role_id = user_role.role_id');
+                 ->from('jabatan')//jabatan adalah anak & pegawai adalah tabel utama 
+                 ->join('user', 'user.role_id = jabatan.id_jabatan');
 
         $query = $this->db->get();
         $result = $query->result_array();
@@ -24,6 +24,7 @@ class User_model extends CI_Model
     {
         $this->db->where('id_user', $id); 
         $this->db->from('user');
+        $this->db->join('pegawai', 'pegawai.nip = user.nip');
         return $this->db->get()->result_array();  
     }
 
@@ -51,7 +52,7 @@ class User_model extends CI_Model
         //return $this->db->query('SELECT * from user_access_menu')->result_array();
         $this->db->select('*')
                  ->from('user_access_menu')//jabatan adalah anak & pegawai adalah tabel utama 
-                 ->join('user_role', 'user_role.role_id = user_access_menu.role_id')
+                 ->join('jabatan', 'jabatan.id_jabatan = user_access_menu.role_id')
                  ->join('user_menu', 'user_menu.id_menu = user_access_menu.menu_id','left');
 
 

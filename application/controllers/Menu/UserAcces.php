@@ -19,9 +19,9 @@ class UserAcces extends CI_Controller {
     }
     public function index()
     {
-        if ($this->session->userdata['role_id'] == "SUs" )
+        if ($this->session->userdata['role_id'] == "SU")
         {
-            $data['title'] = "SubMenu Management";
+            $data['title'] = "User Access Management";
             $data['userAccess'] = $this->modelUser->getUserAcces();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $data['role'] = $this->modelAuth->getrole();
@@ -31,7 +31,6 @@ class UserAcces extends CI_Controller {
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("menu/UserAccess", $data);
             $this->load->view("templates/dashboard_footer");
-
             
         } else
         {
@@ -75,12 +74,8 @@ class UserAcces extends CI_Controller {
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success Add data Access </div>');
             redirect("Menu/UserAcces");
 
-         
-
         }
 
-  
-       
         
     }
 

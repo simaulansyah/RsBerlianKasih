@@ -11,7 +11,9 @@ class Spesialisasi extends CI_Controller {
         $this->load->model('Dokter_model', 'model');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
-        $this->load->helper('file','date');    
+        $this->load->helper('file','date');  
+        $this->load->model('User_model', 'modelUser');
+  
 
         //sesion untuk mengamankan ketika di back tidak login lagi
         if (!$this->session->userdata('user_id')) {
@@ -22,19 +24,20 @@ class Spesialisasi extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata['role_id'] != 1)
+		if ($this->session->userdata['role_id'] == "Rs1" || $this->session->userdata['role_id'] == "SU" )
         {
-            redirect("auth");
-        } else
-        {
-			$data['title'] = "Data Spesialisasi";
-			$data['spesialisasi'] = $this->model->getSpesialisasi();
+            $data['title'] = "Data Spesialisasi";
+            $data['spesialisasi'] = $this->model->getSpesialisasi();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("dokter/spesialisasi", $data);
             $this->load->view("templates/dashboard_footer");  
             
+        } else
+        {
+            redirect("auth");
         }
     }
     
@@ -47,7 +50,8 @@ class Spesialisasi extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['title'] = "Data Spesialisasi";
-			$data['spesialisasi'] = $this->model->getSpesialisasi();
+            $data['spesialisasi'] = $this->model->getSpesialisasi();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -107,7 +111,8 @@ class Spesialisasi extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['title'] = "Data Spesialisasi";
-			$data['spesialisasi'] = $this->model->getSpesialisasi();
+            $data['spesialisasi'] = $this->model->getSpesialisasi();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);

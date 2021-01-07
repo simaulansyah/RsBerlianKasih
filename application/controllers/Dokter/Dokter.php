@@ -11,7 +11,9 @@ class Dokter extends CI_Controller {
         $this->load->model('Pegawai_model', 'model_pegawai');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
-        $this->load->helper('file','date');    
+        $this->load->helper('file','date'); 
+        $this->load->model('User_model', 'modelUser');
+   
 
         //sesion untuk mengamankan ketika di back tidak login lagi
         if (!$this->session->userdata('user_id')) {
@@ -23,21 +25,23 @@ class Dokter extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata['role_id'] != 1)
+		if ($this->session->userdata['role_id'] == "Rs1" || $this->session->userdata['role_id'] == "SU" )
         {
-            redirect("auth");
-        } else
-        {
-			$data['title'] = "Data Dokter";
+            $data['title'] = "Data Dokter";
             $data['dokter'] = $this->model->getDokter();
             $data['spesialisasi'] = $this->model->getSpesialisasi();
             $data['gender'] = $this->model_pegawai->getGender();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("dokter/index", $data);
-            $this->load->view("templates/dashboard_footer");  
+            $this->load->view("templates/dashboard_footer"); 
             
+        } else
+        {	
+            redirect("auth"); 
         }
        
     }
@@ -59,6 +63,8 @@ class Dokter extends CI_Controller {
             $data['dokter'] = $this->model->getDokter();
             $data['spesialisasi'] = $this->model->getSpesialisasi();
             $data['gender'] = $this->model_pegawai->getGender();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -181,6 +187,8 @@ if ($this->form_validation->run() == FALSE){
     $data['dokter'] = $this->model->getDokter();
     $data['spesialisasi'] = $this->model->getSpesialisasi();
     $data['gender'] = $this->model_pegawai->getGender();
+    $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
     $this->load->view("templates/dashboard_header");
     $this->load->view("templates/dashboard_sidebar", $data);
     $this->load->view("templates/dashboard_topbar", $data);

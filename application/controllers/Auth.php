@@ -57,8 +57,8 @@ class Auth extends CI_Controller {
                 //jika password betul cek jabatan
                if ($role != $cek_login->role_id)
                {
-                //var_dump($role , $cek_login->role_id);
-                //die;
+                // var_dump($role , $cek_login->role_id);
+                // die;
                 echo '<script>alert("Jabatan yang Anda masukan Tidak Sesuai.");window.location.href="' . base_url('auth') . '";</script>';
                die;
                }
@@ -74,15 +74,19 @@ class Auth extends CI_Controller {
                 );
                 $this->session->set_userdata($session_data);
 
-                if ($this->session->userdata['role_id'] == "SUs") {
+                if ($this->session->userdata['role_id'] == "SU") {
                     redirect('admin');
                 }
-                if ($this->session->userdata['role_id'] == "Rs03s") {
+                if ($this->session->userdata['role_id'] == "Rs3") {
                     redirect('Perawat/Perawat');
                 }
-                if ($this->session->userdata['role_id'] == "Rs01s") {
+                if ($this->session->userdata['role_id'] == "Rs1") {
                     redirect('admin');
-                } else {
+                } 
+                if ($this->session->userdata['role_id'] == "Rs2") {
+                    redirect('admin');
+                }
+                 else {
                     redirect('welcome');
                 }
 

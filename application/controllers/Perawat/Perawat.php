@@ -23,7 +23,7 @@ class Perawat extends CI_Controller {
     }
     public function index()
     {
-        if ($this->session->userdata['role_id'] == "Rs03s" || $this->session->userdata['role_id'] == "SUs" )
+        if ($this->session->userdata['role_id'] == "Rs3" || $this->session->userdata['role_id'] == "SU" )
         {
             $data['title'] = "Perawat";
             $data['totalKasur'] = $this->modelRuangan->getRowKasur();

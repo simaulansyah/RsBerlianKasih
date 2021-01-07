@@ -12,6 +12,7 @@ class Asset extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
         $this->load->helper('file','date');    
+        $this->load->model('User_model', 'modelUser');
 
         //sesion untuk mengamankan ketika di back tidak login lagi
         if (!$this->session->userdata('user_id')) {
@@ -21,22 +22,23 @@ class Asset extends CI_Controller {
     }
 	public function index()
 	{
-        if ($this->session->userdata['role_id'] != 1)
-        {
-            redirect("auth");
-        } else
+        if ($this->session->userdata['role_id'] == "Rs2" || $this->session->userdata['role_id'] == "SU" )
         {
             $data['idasset'] = $this->model->maxID();
             $data['asset'] = $this->model->getAsset();
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['lokasi'] = $this->model->getLokasi();
             $data['title'] = "Data Asset";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("Asset/index", $data);
             $this->load->view("templates/dashboard_footer");  
             
+        } else
+        {
+            redirect("auth");
         }
        
     }
@@ -56,6 +58,8 @@ class Asset extends CI_Controller {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['lokasi'] = $this->model->getLokasi();
             $data['title'] = "Data Asset";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -170,6 +174,8 @@ class Asset extends CI_Controller {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['lokasi'] = $this->model->getLokasi();
             $data['title'] = "Data Asset";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -261,39 +267,23 @@ class Asset extends CI_Controller {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     public function Kategori()
     {
-        if ($this->session->userdata['role_id'] != 1)
-        {
-            redirect("auth");
-        } else
+        if ($this->session->userdata['role_id'] == "Rs2" || $this->session->userdata['role_id'] == "SU" )
         {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['title'] = "Kategori Asset";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("Asset/kategori", $data);
-            $this->load->view("templates/dashboard_footer");  
+            $this->load->view("templates/dashboard_footer"); 
+            
+        } else
+        {
+            redirect("auth");
         }
 
     }
@@ -306,6 +296,8 @@ class Asset extends CI_Controller {
         {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['title'] = "Kategori Asset";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -366,6 +358,8 @@ class Asset extends CI_Controller {
         {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['title'] = "Kategori Asset";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -389,13 +383,25 @@ class Asset extends CI_Controller {
 
    public function Lokasi()
   {
+    if ($this->session->userdata['role_id'] == "Rs2" || $this->session->userdata['role_id'] == "SU" )
+    {
+    
     $data['lokasi'] = $this->model->getLokasi();
     $data['title'] = "Lokasi Asset";
+    $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
     $this->load->view("templates/dashboard_header");
     $this->load->view("templates/dashboard_sidebar", $data);
     $this->load->view("templates/dashboard_topbar", $data);
     $this->load->view("Asset/lokasi", $data);
     $this->load->view("templates/dashboard_footer"); 
+
+    } else 
+    {
+        redirect("auth");
+    }
+
+    
 
   }
 
@@ -409,6 +415,8 @@ class Asset extends CI_Controller {
     {   
         $data['lokasi'] = $this->model->getLokasi();
         $data['title'] = "Lokasi Asset";
+        $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
         $this->load->view("templates/dashboard_header");
         $this->load->view("templates/dashboard_sidebar", $data);
         $this->load->view("templates/dashboard_topbar", $data);
@@ -464,6 +472,8 @@ class Asset extends CI_Controller {
     {   
         $data['lokasi'] = $this->model->getLokasi();
         $data['title'] = "Lokasi Asset";
+        $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
         $this->load->view("templates/dashboard_header");
         $this->load->view("templates/dashboard_sidebar", $data);
         $this->load->view("templates/dashboard_topbar", $data);

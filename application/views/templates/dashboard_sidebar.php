@@ -1,9 +1,9 @@
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
     <div class="sidebar-brand-icon">
-      <img src="<?= base_url('vendor/img/logo1.jpg') ?>">
+      <img src="<?= base_url('vendor/img/logo1.jpg') ?>" href="<?= base_url('admin'); ?>" >
     </div>
-    <div class="sidebar-brand-text mx-3"> Berlian-Kasih</div>
+    <div class="sidebar-brand-text mx-3" href="<?= base_url('admin'); ?>" > Berlian-Kasih</div>
   </a>
   <hr class="sidebar-divider my-0">
   
@@ -38,7 +38,6 @@
         </div>
 
          <!-- SIAPKAN SUB-MENU SESUAI MENU -->
-
          <?php 
           $menuId = $m['id_menu'];
           $querySubMenu = "SELECT* 
