@@ -30,6 +30,7 @@
             <th scope="col">#</th>
                 <th scope="col">ID Jabatan</th>
                 <th scope="col">Nama Jabatan</th>
+                <th scope="col">Status</th>
                 <th scope="col">Gaji Pokok</th>
                 <th scope="col">Tunjangan Jabatan</th>
                 <th scope="col">aksi</th>
@@ -42,6 +43,7 @@
                 <td><?=$i?></td>
                 <td><?=$j['id_jabatan']?></td>
                 <td><?=$j['nama_jabatan']?></td>
+                <td><?= ($j['user'] == 1 ) ? "User" : "Bukan User"; ?></td>
                 <td><?=$j['gaji_pokok']?></td>
                 <td><?=$j['tunj_jabatan']?></td>
                 <td>
@@ -116,6 +118,12 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" id="tbhtunj_jabatan" name="tbhtunj_jabatan">
                             </div>
+                            
+                            <div class="form-group">
+                            <input type="hidden" name="check[0]" value="0" />
+                            <input type="checkbox" id="Active" name="check[0]" value="1"/>
+                            <label for="Active">User</label><br>
+                            </div>
 
                         </div>
                         <div class="modal-footer">
@@ -168,6 +176,12 @@
                             <label>Tunjangan Jabatan</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="edittunj_jabatan" name="edittunj_jabatan" value="<?= $j['tunj_jabatan'] ?>" >
+                            </div>
+                            <label>Status User</label>
+                            <div class="form-group">
+                            <input type="hidden" name="check[0]" value="0" />
+                            <input type="checkbox" id="Active" name="check[0]" value="1" <?php if($j['user'] == "1" ){ echo "checked"; } ?> >
+                            <label for="Active">User</label><br>
                             </div>
 </div>
       <!-- akhir isi edit -->

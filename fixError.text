@@ -1,0 +1,25 @@
+#1061 - Duplicate key name 'id_jabatan'
+
+ KEY `id_jabatan` (`id_jabatan`),
+  UNIQUE KEY `id_jabatan` (`id_jabatan`),
+
+
+remove this line
+
+ UNIQUE KEY `id_jabatan` (`id_jabatan`),
+
+since unique_id is already Primary Key. and Primary Keys are unique.
+
+
+
+error web server already running
+cari web server yang aktif lalu
+
+sudo netstat -nap | grep apache2
+
+kill pid nya
+
+
+untuk membuat vscode mode root
+
+sudo code --user-data-dir="~/.vscode-root"

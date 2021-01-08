@@ -7,6 +7,7 @@ class Pegawai extends CI_Controller {
         parent::__construct();
         //load model admin
         $this->load->model('Pegawai_model', 'pegawai');
+        $this->load->model('User_model', 'modelUser');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
         $this->load->helper('file');    
@@ -19,18 +20,14 @@ class Pegawai extends CI_Controller {
     }
     public function index()
     {
-        if ($this->session->userdata['role_id'] != 1)
+        if ($this->session->userdata['role_id'] == "Rs1" || $this->session->userdata['role_id'] == "SU" )
         {
-            redirect("auth");
-        } else
-        {
-
-
             $data['jk'] = $this->pegawai->getGender();
             $data['stat'] = $this->pegawai->getStat();
             $data['pegawai'] = $this->pegawai->getpegawai();
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
 
 
             $data['title'] = "Data Pegawai";
@@ -39,6 +36,12 @@ class Pegawai extends CI_Controller {
             $this->load->view("templates/dashboard_topbar", $data);
             $this->load->view("pegawai/index", $data);
             $this->load->view("templates/dashboard_footer");
+
+    
+        } else
+        {
+
+            redirect("auth");
             
         }
        
@@ -286,7 +289,9 @@ class Pegawai extends CI_Controller {
 
     {  
             $data['jabatan'] = $this->pegawai->getJabatan();
-            $data['title'] = "Kategori";
+            $data['title'] = "Data Kategori Pegawai";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -324,6 +329,7 @@ class Pegawai extends CI_Controller {
         {
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['title'] = "Kategori";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -337,6 +343,7 @@ class Pegawai extends CI_Controller {
                 'nama_jabatan' => $this->input->post('tbhnama_jabatan'),
                 'gaji_pokok' => $this->input->post('tbhgaji_pokok'),
                 'tunj_jabatan' => $this->input->post('tbhtunj_jabatan'),
+                'user' => $this->input->post('check[0]')
             ); 
            
             $this->pegawai->setKategori($data);
@@ -376,6 +383,7 @@ class Pegawai extends CI_Controller {
         {
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['title'] = "Kategori";
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $this->load->view("templates/dashboard_header");
             $this->load->view("templates/dashboard_sidebar", $data);
             $this->load->view("templates/dashboard_topbar", $data);
@@ -390,7 +398,8 @@ class Pegawai extends CI_Controller {
                 'id_jabatan' => $this->input->post('editid_jabatan'),
                 'nama_jabatan' => $this->input->post('editnama_jabatan'),
                 'gaji_pokok' => $this->input->post('editgaji_pokok'),
-                'tunj_jabatan' => $this->input->post('edittunj_jabatan')
+                'tunj_jabatan' => $this->input->post('edittunj_jabatan'),
+                'user' => $this->input->post('check[0]')
             ];
 
             $this->pegawai->updateKategori($data, $oldid);
