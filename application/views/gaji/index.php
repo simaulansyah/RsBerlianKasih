@@ -15,7 +15,7 @@
         <a href="" data-toggle="modal" data-target="#tbhgajiModal" class="badge badge-warning"> Tambah Data Gaji </a>
         </div>
 
-        <table class="table table-striped" id="datagaji">
+        <table class="table table-striped" id="datatabel">
         <thead>
             <td>#</td>
                 <td>No Slip</td>

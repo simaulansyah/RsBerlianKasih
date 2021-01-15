@@ -33,11 +33,15 @@ class Dokter extends CI_Controller {
             $data['gender'] = $this->model_pegawai->getGender();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
 
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("dokter/index", $data);
-            $this->load->view("templates/dashboard_footer"); 
+            $this->load->view("templates/light_footer", $data);
+
+       
             
         } else
         {	
@@ -65,11 +69,13 @@ class Dokter extends CI_Controller {
             $data['gender'] = $this->model_pegawai->getGender();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
 
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("dokter/index", $data);
-            $this->load->view("templates/dashboard_footer");  
+            $this->load->view("templates/light_footer", $data);  
 
         } else 
         {
@@ -189,11 +195,13 @@ if ($this->form_validation->run() == FALSE){
     $data['gender'] = $this->model_pegawai->getGender();
     $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
 
-    $this->load->view("templates/dashboard_header");
-    $this->load->view("templates/dashboard_sidebar", $data);
-    $this->load->view("templates/dashboard_topbar", $data);
+    $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+    $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+    $this->load->view("templates/light_header", $data);
+    $this->load->view("templates/light_sidebar", $data);
     $this->load->view("dokter/index", $data);
-    $this->load->view("templates/dashboard_footer");  
+    $this->load->view("templates/light_footer", $data);
 
     } else
     {

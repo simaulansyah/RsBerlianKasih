@@ -28,14 +28,15 @@ class Pegawai extends CI_Controller {
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
 
-
-            $data['title'] = "Data Pegawai";
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['title'] = "Data Pegawai";     
+            
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("pegawai/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);   
 
     
         } else
@@ -54,16 +55,21 @@ class Pegawai extends CI_Controller {
 
         if ($this->form_validation->run()== false)
         {
+            $data['jk'] = $this->pegawai->getGender();
+            $data['stat'] = $this->pegawai->getStat();
             $data['pegawai'] = $this->pegawai->getpegawai();
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $data['title'] = "Data Pegawai";     
             
-            $data['title'] = "Data Pegawai";
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("pegawai/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
         }else {
 
 
@@ -176,16 +182,21 @@ class Pegawai extends CI_Controller {
 
         if ($this->form_validation->run()== false)
         {
+            $data['jk'] = $this->pegawai->getGender();
+            $data['stat'] = $this->pegawai->getStat();
             $data['pegawai'] = $this->pegawai->getpegawai();
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['queryjabatan'] = $this->pegawai->getJoinJabatan();
+            $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $data['title'] = "Data Pegawai";     
             
-            $data['title'] = "Data Pegawai";
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("pegawai/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
 
         }
         else
@@ -291,12 +302,13 @@ class Pegawai extends CI_Controller {
             $data['jabatan'] = $this->pegawai->getJabatan();
             $data['title'] = "Data Kategori Pegawai";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
 
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("pegawai/kategori", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
     }
 
     public function hapusKategori($id)
@@ -328,13 +340,15 @@ class Pegawai extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['jabatan'] = $this->pegawai->getJabatan();
-            $data['title'] = "Kategori";
+            $data['title'] = "Data Kategori Pegawai";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("pegawai/kategori", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
         
         } else 
         {
@@ -382,13 +396,15 @@ class Pegawai extends CI_Controller {
         if ($this->form_validation->run() == False)
         {
             $data['jabatan'] = $this->pegawai->getJabatan();
-            $data['title'] = "Kategori";
+            $data['title'] = "Data Kategori Pegawai";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("pegawai/kategori", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
 
         }
         else

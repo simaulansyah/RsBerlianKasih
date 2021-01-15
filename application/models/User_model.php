@@ -99,5 +99,13 @@ class User_model extends CI_Model
     {
         $this->db->update('user_sub_menu', $data, array('id_sub' => $id));
     }
+    public function getNamaJabatan($id)
+    {   
+        $this->db->select('nama_jabatan');
+        $this->db->where('id_jabatan', $id); 
+        $this->db->from('jabatan');
+        return $this->db->get()->row()->nama_jabatan; 
+    }
+
 
 }

@@ -18,7 +18,7 @@
 
         <h5><?= $this->session->flashdata('message'); ?></h5> 
 
-        <table class="table table-striped" id="asset">
+        <table class="table table-striped" id="datatabel">
             <thead>
                 <td>#</td>
                 <td>Id Asset</td>

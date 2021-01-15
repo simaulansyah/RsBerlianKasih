@@ -16,7 +16,7 @@
         <?= form_error('nama_lokasi', '<small class="text-danger pl-3" role="alert">', '</small>'); ?>
         <h5><?= $this->session->flashdata('message'); ?></h5> 
 
-        <table class="table table-striped" id="lokasi_aset">
+        <table class="table table-striped" id="datatabel">
             <thead>
                 <td>#</td>
                 <td>Nama Lokasi</td>

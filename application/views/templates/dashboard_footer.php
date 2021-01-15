@@ -111,50 +111,26 @@ $(document).ready(function(){
 })
 
 
+// $(document).ready(function(){
+//   $(document).on('click', '#saveAsset', function (){
+//     var today = new Date();
+//     var dd = String(today.getDate()).padStart(2, '0');
+//     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+//     var yyyy = today.getFullYear();
 
-$(document).ready(function(){
-  $(document).on('click', '#selectidRuangan', function (){
+//     var kategori = document.getElementById("kategori").value;
+//     var tahun = document.getElementById("tahun").value;
+//     var lastid = document.getElementById("lastvalueid").value;
 
-    var id_ruangan = $(this).data('id_ruangan');
-    var nama_ruangan = $(this).data('nama_ruangan')
-    var kelas = $(this).data('kelas');
+//     var id_asset = 'aset_' + lastid +'/'+ mm + tahun;
 
+//     console.log(id_asset);
 
-    $('#id_ruangan').val(id_ruangan);
-    $('#nama_ruangan').val(nama_ruangan);
-    $('#kelas').val(kelas);
-    $('#idRuangan').modal('hide');
-
-
-  })
-})
-
-
-$(document).ready(function(){
-  $(document).on('click', '#saveAsset', function (){
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    var kategori = document.getElementById("kategori").value;
-    var tahun = document.getElementById("tahun").value;
-    var lastid = document.getElementById("lastvalueid").value;
-
-    var id_asset = 'aset_' + lastid +'/'+ mm + tahun;
-
-    console.log(id_asset);
-
-    $('#idasset').val(id_asset);
+//     $('#idasset').val(id_asset);
 
 
-  })
-})
-
-
-
-
-
+//   })
+// })
 
 </script>
 </body>

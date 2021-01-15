@@ -26,11 +26,15 @@ class UserAcces extends CI_Controller {
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $data['role'] = $this->modelAuth->getrole();
             $data['menu'] = $this->modelUser->getMenu();
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
-            $this->load->view("menu/UserAccess", $data);
-            $this->load->view("templates/dashboard_footer");
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
+            $this->load->view("menu/UserAccess", $data);      
+            $this->load->view("templates/light_footer", $data);
+
+         
             
         } else
         {
@@ -56,11 +60,13 @@ class UserAcces extends CI_Controller {
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $data['role'] = $this->modelAuth->getrole();
             $data['menu'] = $this->modelUser->getMenu();
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
-            $this->load->view("menu/UserAccess", $data);
-            $this->load->view("templates/dashboard_footer");
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
+            $this->load->view("menu/UserAccess", $data);      
+            $this->load->view("templates/light_footer", $data);
 
         } else
         {
@@ -111,11 +117,13 @@ class UserAcces extends CI_Controller {
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
             $data['role'] = $this->modelAuth->getrole();
             $data['menu'] = $this->modelUser->getMenu();
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
-            $this->load->view("menu/UserAccess", $data);
-            $this->load->view("templates/dashboard_footer");
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
+            $this->load->view("menu/UserAccess", $data);      
+            $this->load->view("templates/light_footer", $data);
 
         } else{
             $data = [

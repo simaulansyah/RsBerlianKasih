@@ -75,16 +75,16 @@ class Auth extends CI_Controller {
                 $this->session->set_userdata($session_data);
 
                 if ($this->session->userdata['role_id'] == "SU") {
-                    redirect('admin');
+                    redirect('SuperUser/SuperUser');
                 }
                 if ($this->session->userdata['role_id'] == "Rs3") {
                     redirect('Perawat/Perawat');
                 }
                 if ($this->session->userdata['role_id'] == "Rs1") {
-                    redirect('admin');
+                    redirect('HRD/HRD');
                 } 
                 if ($this->session->userdata['role_id'] == "Rs2") {
-                    redirect('admin');
+                    redirect('Staff/Staff');
                 }
                  else {
                     redirect('welcome');

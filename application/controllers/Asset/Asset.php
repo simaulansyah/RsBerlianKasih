@@ -30,11 +30,13 @@ class Asset extends CI_Controller {
             $data['lokasi'] = $this->model->getLokasi();
             $data['title'] = "Data Asset";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Asset/index", $data);
-            $this->load->view("templates/dashboard_footer");  
+            $this->load->view("templates/light_footer", $data);
             
         } else
         {
@@ -59,12 +61,13 @@ class Asset extends CI_Controller {
             $data['lokasi'] = $this->model->getLokasi();
             $data['title'] = "Data Asset";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Asset/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
         } else 
         {
 
@@ -175,12 +178,13 @@ class Asset extends CI_Controller {
             $data['lokasi'] = $this->model->getLokasi();
             $data['title'] = "Data Asset";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Asset/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
 
         } else 
         {
@@ -275,12 +279,13 @@ class Asset extends CI_Controller {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['title'] = "Kategori Asset";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Asset/kategori", $data);
-            $this->load->view("templates/dashboard_footer"); 
-            
+            $this->load->view("templates/light_footer", $data);
         } else
         {
             redirect("auth");
@@ -297,12 +302,13 @@ class Asset extends CI_Controller {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['title'] = "Kategori Asset";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Asset/kategori", $data);
-            $this->load->view("templates/dashboard_footer"); 
+            $this->load->view("templates/light_footer", $data);
         }else {
 
 
@@ -359,12 +365,13 @@ class Asset extends CI_Controller {
             $data['kategori'] = $this->model->getKategoriAsset();
             $data['title'] = "Kategori Asset";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Asset/kategori", $data);
-            $this->load->view("templates/dashboard_footer"); 
+            $this->load->view("templates/light_footer", $data);
         }else {
             $data = [  
                 'id_k_asset' => $this->input->post('id_k_asset'),
@@ -389,13 +396,13 @@ class Asset extends CI_Controller {
     $data['lokasi'] = $this->model->getLokasi();
     $data['title'] = "Lokasi Asset";
     $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-    $this->load->view("templates/dashboard_header");
-    $this->load->view("templates/dashboard_sidebar", $data);
-    $this->load->view("templates/dashboard_topbar", $data);
+    $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+    $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+    $this->load->view("templates/light_header", $data);
+    $this->load->view("templates/light_sidebar", $data);
     $this->load->view("Asset/lokasi", $data);
-    $this->load->view("templates/dashboard_footer"); 
-
+    $this->load->view("templates/light_footer", $data);     
     } else 
     {
         redirect("auth");
@@ -409,20 +416,20 @@ class Asset extends CI_Controller {
   public function tambahLokasi()
   {
 
-    $this->form_validation->set_rules('nama_lokasi', 'Nama Lokasi ', 'required|is_unique[lokasi.nama_lokasi]');
+    $this->form_validation->set_rules('nama_lokasi', 'Nama Lokasi ', 'required|trim|is_unique[lokasi.nama_lokasi]');
     
     if ($this->form_validation->run()== false)
     {   
         $data['lokasi'] = $this->model->getLokasi();
         $data['title'] = "Lokasi Asset";
         $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-        $this->load->view("templates/dashboard_header");
-        $this->load->view("templates/dashboard_sidebar", $data);
-        $this->load->view("templates/dashboard_topbar", $data);
+        $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+        $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+            
+        $this->load->view("templates/light_header", $data);
+        $this->load->view("templates/light_sidebar", $data);
         $this->load->view("Asset/lokasi", $data);
-        $this->load->view("templates/dashboard_footer"); 
-    
+        $this->load->view("templates/light_footer", $data); 
     }else {
 
 
@@ -466,19 +473,20 @@ class Asset extends CI_Controller {
 
       $oldid = $this->input->post('id_lokasi');
 
-    $this->form_validation->set_rules('nama_lokasi', 'Nama Lokasi ', 'required'.$is_unique);
+    $this->form_validation->set_rules('nama_lokasi', 'Nama Lokasi ', 'required|trim'.$is_unique);
 
     if ($this->form_validation->run()== false)
     {   
         $data['lokasi'] = $this->model->getLokasi();
         $data['title'] = "Lokasi Asset";
         $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-        $this->load->view("templates/dashboard_header");
-        $this->load->view("templates/dashboard_sidebar", $data);
-        $this->load->view("templates/dashboard_topbar", $data);
+        $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+        $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+            
+        $this->load->view("templates/light_header", $data);
+        $this->load->view("templates/light_sidebar", $data);
         $this->load->view("Asset/lokasi", $data);
-        $this->load->view("templates/dashboard_footer"); 
+        $this->load->view("templates/light_footer", $data); 
     
     }else {
     $data = [  

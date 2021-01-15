@@ -28,11 +28,14 @@ class Ruangan extends CI_Controller {
             $data['title'] = "Data Ruangan ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Ruangan/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
             
         } else
         {
@@ -55,13 +58,14 @@ class Ruangan extends CI_Controller {
             $data['title'] = "Data Ruangan ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+           
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Ruangan/index", $data);
-            $this->load->view("templates/dashboard_footer");
-        
+            $this->load->view("templates/light_footer", $data);
+
         } else 
         {
                 $id_ruangan = $this->input->post('idruangan');
@@ -108,7 +112,7 @@ class Ruangan extends CI_Controller {
         // cek idruangan
      $oldid = $this->input->post('oldid');
      if($this->input->post('idruangan') != $oldid) {
-         $is_unique =  '|is_unique[jabatan.id_jabatan]';
+         $is_unique =  '|is_unique[ruangan.id_ruangan]';
      } else {
         $is_unique =  '' ;
      }
@@ -116,13 +120,11 @@ class Ruangan extends CI_Controller {
      //cek nama ruangan sebelmunya
 
      $oldname = $this->input->post('oldname');
-     if($this->input->post('nama_ruangan') != $oldname) {
-         $is_uniqueName =  '|is_unique[jabatan.nama_jabatan]';
+     if($this->input->post('namaruangan') != $oldname) {
+         $is_uniqueName =  '|is_unique[ruangan.nama_ruangan]';
       } else {
          $is_uniqueName =  '' ;
       }
-
-
 
         $this->form_validation->set_rules('idruangan','ID Ruangan', 'required'.$is_unique);
         $this->form_validation->set_rules('namaruangan','Nama Ruangan', 'required'.$is_uniqueName);
@@ -135,13 +137,13 @@ class Ruangan extends CI_Controller {
             $data['title'] = "Data Ruangan ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+           
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Ruangan/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
         
         } else {
 
@@ -164,6 +166,7 @@ class Ruangan extends CI_Controller {
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Success edit data Ruangan </div>');
         redirect("Ruangan/Ruangan");
         }
+       
      
 
 

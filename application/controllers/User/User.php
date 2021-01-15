@@ -29,15 +29,13 @@ class User extends CI_Controller {
             $data['User'] = $this->model->getUser();
             $data['queryUser'] = $this->model->getJoinRole();
             $data['namauser'] = $this->model->getNamaUser($this->session->userdata['user_id']);
+            $data['link'] = $this->model->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
 
-            // var_dump($this->model->getJoinRole());
-            // die;
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
-            $this->load->view("User/index", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
+            $this->load->view("User/index", $data);            
+            $this->load->view("templates/light_footer", $data);
        
         } else
         {

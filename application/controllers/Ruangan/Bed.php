@@ -30,11 +30,13 @@ class Bed extends CI_Controller {
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Ruangan/bed", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
            
         } else
         {
@@ -54,17 +56,19 @@ class Bed extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
+            $data ['total'] = $this->model->getRowKasur();
+            $data['stat'] = $this->model->getStatus();
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Ruangan/bed", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
         
         } else 
         {
@@ -123,17 +127,19 @@ class Bed extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
+            $data ['total'] = $this->model->getRowKasur();
+            $data['stat'] = $this->model->getStatus();
             $data['title'] = "Data Tempat Tidur ";
             $data['ruangan'] = $this->model->getRuangan();
             $data['bed'] = $this->model->getBed();
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+        
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
             $this->load->view("Ruangan/bed", $data);
-            $this->load->view("templates/dashboard_footer");
+            $this->load->view("templates/light_footer", $data);
         
         } else {
 

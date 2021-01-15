@@ -30,12 +30,13 @@ class Obat extends CI_Controller {
         $data['suplier'] = $this->fcurl->urlGet(base_url('/api/Apotek/Obat'));
         $data['title'] = "Data Suplier";
         $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-        $this->load->view("templates/dashboard_header");
-        $this->load->view("templates/dashboard_sidebar", $data);
-        $this->load->view("templates/dashboard_topbar", $data);
-        $this->load->view("Apotek/suplier", $data);
-        $this->load->view("templates/dashboard_footer");  
+        $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+        $data['linkDashboard'] = $data['link'].'/'.$data['link'];
 
+        $this->load->view("templates/light_header", $data);
+        $this->load->view("templates/light_sidebar", $data);
+        $this->load->view("Apotek/suplier", $data);     
+        $this->load->view("templates/light_footer", $data);
     }
 
     public function tambahSuplier()
@@ -50,12 +51,13 @@ class Obat extends CI_Controller {
         $data['suplier'] = $this->fcurl->urlGet(base_url('/api/Apotek/Obat'));
         $data['title'] = "Data Suplier";
         $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
+        $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+        $data['linkDashboard'] = $data['link'].'/'.$data['link'];
 
-        $this->load->view("templates/dashboard_header");
-        $this->load->view("templates/dashboard_sidebar", $data);
-        $this->load->view("templates/dashboard_topbar", $data);
-        $this->load->view("Apotek/suplier", $data);
-        $this->load->view("templates/dashboard_footer"); 
+        $this->load->view("templates/light_header", $data);
+        $this->load->view("templates/light_sidebar", $data);
+        $this->load->view("Apotek/suplier", $data);     
+        $this->load->view("templates/light_footer", $data);
 
         } else
 
@@ -116,12 +118,13 @@ class Obat extends CI_Controller {
             $data['suplier'] = $this->fcurl->urlGet(base_url('/api/Apotek/Obat'));
             $data['title'] = "Data Suplier";
             $data['namauser'] = $this->modelUser->getNamaUser($this->session->userdata['user_id']);
-
-            $this->load->view("templates/dashboard_header");
-            $this->load->view("templates/dashboard_sidebar", $data);
-            $this->load->view("templates/dashboard_topbar", $data);
-            $this->load->view("Apotek/suplier", $data);
-            $this->load->view("templates/dashboard_footer"); 
+            $data['link'] = $this->modelUser->getNamaJabatan($this->session->userdata['role_id']);
+            $data['linkDashboard'] = $data['link'].'/'.$data['link'];
+    
+            $this->load->view("templates/light_header", $data);
+            $this->load->view("templates/light_sidebar", $data);
+            $this->load->view("Apotek/suplier", $data);     
+            $this->load->view("templates/light_footer", $data);
 
         }else
         {
